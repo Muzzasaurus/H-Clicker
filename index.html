@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
+        <script src="javascript.js"></script>
+        <link rel="stylesheet" href="style.css">
+		<link id="theme" rel="stylesheet" href="Themes/green.css">
+    </head>
+    <body onload="onStart()">
+		<title>H Clicker v0.25</title>
+		<div class="split top">
+		<table class="mainBar">
+			<tr>
+				<td class="mainBarTd"><button id="themeDisplay" type="button" class="tallButton" onclick="changeTheme(1)">Theme: Default</button></td>
+				<td class="mainBarTd"><button type="button" class="tallButton">Options</button></td>
+				<td class="mainDisplay" id="currency"><p>0 Hs<br>0H/s</p></td>
+				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hBusiness','1')">H Business</button></td>
+				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hMachine','1')">The Machine</button></td>
+			</tr>
+		</table>
+		</div>
+		<div class="split middle">
+			<img id="hButton" src="Resources/h.png" onclick="increment()"></button>
+			<p id="clickDisplay" class="shopText">1 H/c</p>
+		</div>
+		<div class="split bottom">
+		<table class="hShop">
+			<tr>
+				<!-- H Shop (H Per Second) -->
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade1" onclick="purchase(1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade2" onclick="purchase(2)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade3" onclick="purchase(3)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade4" onclick="purchase(4)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade5" onclick="purchase(5)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade6" onclick="purchase(6)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade7" onclick="purchase(7)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade8" onclick="purchase(8)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade9" onclick="purchase(9)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade10" onclick="purchase(10)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade11" onclick="purchase(11)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade12" onclick="purchase(12)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade13" onclick="purchase(13)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade14" onclick="purchase(14)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade15" onclick="purchase(15)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade16" onclick="purchase(16)">Loading...</button></td>
+			</tr>
+		</table>
+		</div>
+		<div id="greyOut1" hidden="hidden">
+		</div>
+		<div id="greyOut2" hidden="hidden">
+		</div>
+		<div id="hBusiness" hidden="hidden">
+		<button type="button" onclick="closeWindow('hBusiness','1')" id="closeButton"></button>
+		<table class="hBusinessTable">
+			<tr>
+				<!-- H Business (H Per Click)-->
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness1" onclick="purchaseBusiness(1)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness2" onclick="purchaseBusiness(2)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness3" onclick="purchaseBusiness(3)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness4" onclick="purchaseBusiness(4)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness5" onclick="purchaseBusiness(5)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness6" onclick="purchaseBusiness(6)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness7" onclick="purchaseBusiness(7)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness8" onclick="purchaseBusiness(8)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness9" onclick="purchaseBusiness(9)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness10" onclick="purchaseBusiness(10)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness11" onclick="purchaseBusiness(11)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness12" onclick="purchaseBusiness(12)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness13" onclick="purchaseBusiness(13)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness14" onclick="purchaseBusiness(14)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness15" onclick="purchaseBusiness(15)">Loading...</button></td>
+			</tr>
+		</table>
+		</div>
+				<!--- H Machine -->
+		<div id="hMachine" hidden="hidden">
+			<button type="button" onclick="closeWindow('hMachine','1')" id="closeButton"></button>
+			<p class="shopText" style="font-size: 45px; margin: 16px;">Welcome to The Machine</p>
+			<p class="shopText" style="font-weight: normal; font-size: 25px; margin: 0px;">Here you can sacrifice all your wealth for the Glod H, you will lose all your progress, but the Glod H will help you rebuild your empire quicker than before.</p>
+			<p id="glodCountdown" class="shopText" style="font-size: 25px; margin: 0px;">1000000000 Hs left.</p>
+			<button id="resetButton" type="button" class="smallButton shopText" onclick="glodPrestige()">Reset for 0 Glod H</button>
+			<p id="glodHDisplay" class="shopText" style="font-size: 30px; margin: 0;">0 Glod H</p>
+			<p id="glodHNuggetDisplay" class="shopText" style="font-size: 25px; margin: 0;">0 Glod H Nuggets</p>
+			<button type="button" class="smallButton round" onclick="popupWindow('glodShop','2')">Glod Shop</button>
+		</div>
+				<!--- Glod Shop -->
+		<div id="glodShop" hidden="hidden">
+			<button type="button" onclick="closeWindow('glodShop','2')" id="closeButton"></button>
+			<p class="shopText" style="font-size: 45px; margin: 10px;">Glod Shop</p>
+			<p id="glodHNuggetDisplay2" class="shopText" style="font-size: 25px; margin: 0px;">0 Glod H Nuggets</p>
+			<table>
+				<tr>
+					<td class="glodShopTd"><span id="mouseOver1"><p>Increase glod limit to 100</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'limit')">5 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver2"><p>+1% Overall H boost per Glod H</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'power')">5 Glod Nuggets</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+				</tr>
+				<tr>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+				</tr>
+				<tr>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

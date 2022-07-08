@@ -1,0 +1,45 @@
+:root {
+	--second-lightest: #ffb4fc;
+	--middle-colour: #d5b4ff;
+	--second-darkest: #b4ccff;
+	--darkest-colour: #b4e6ff;
+	--textcolour: #000000;
+}
+.top {
+	background-color: var(--middle-colour);
+}
+.middle {
+	background-color: var(--second-lightest);
+}
+.bottom {
+	background-color: var(--middle-colour);
+}
+
+.tallButton {
+	background-color: var(--middle-colour);
+}
+.tallButton:hover {
+	background-color: var(--second-darkest);
+}
+.tallButton:disabled:hover {
+	background-color: var(--middle-colour);
+}
+#hBusiness {
+	background-color: var(--second-lightest);
+
+}
+#hMachine {
+	background-color: var(--second-lightest);
+}
+#closeButton {
+	background-color: var(--darkest-colour);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--darkest-colour);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--second-darkest);
+}

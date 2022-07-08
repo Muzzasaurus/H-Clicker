@@ -1,0 +1,56 @@
+:root {
+	--second-lightest: #ffae6b;
+	--middle-colour: #dd4e00;
+	--second-darkest: #a11f1f;
+	--darkest-colour: #765c5c;
+	--textcolour: #000000;
+}
+.top {
+	background-color: var(--middle-colour);
+}
+.middle {
+	background-color: var(--second-lightest);
+}
+.bottom {
+	background-color: var(--middle-colour);
+}
+
+.tallButton {
+	background-color: var(--middle-colour);
+}
+.tallButton:hover {
+	background-color: var(--second-darkest);
+}
+.tallButton:disabled:hover {
+	background-color: var(--middle-colour);
+}
+#hBusiness {
+	background-color: var(--second-lightest);
+
+}
+#hMachine {
+	background-color: var(--second-lightest);
+}
+#closeButton {
+	background-color: var(--darkest-colour);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--darkest-colour);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--second-darkest);
+}
+/*
+.shopText {
+	color: #d1d1d1;
+}
+.tallButton {
+	color: #d1d1d1;
+}
+.mainDisplay {
+	color: #d1d1d1;
+}
+*/

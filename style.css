@@ -1,0 +1,307 @@
+html {
+	cursor: url('Resources/h_cursor.png'), auto;
+}
+/* Div classes */
+.split {
+	width: 100%;
+	position: fixed;
+	z-index: -1;
+	top: 0;
+	padding-top: 85px;
+	left: 0;
+}
+.top {
+	top: 0;
+	height: 20%;
+	padding-top: 0px;
+	border: 3px solid black;
+}
+.middle {
+	top: 20%;
+	height: 50%;
+	padding-top: 0px;
+	border: 3px solid black;
+}
+.bottom {
+	top: 70%;
+	height: 30%;
+	padding-top: 0px;
+	border: 3px solid black;
+	overflow-x: scroll;
+}
+/* Main Bar */
+.mainBar, .mainBarTd, .mainDisplay {
+	border: 3px solid black;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+    border-spacing: 0;
+}
+.mainBarTd {
+	width: 10%;
+	padding: 0;
+}
+.mainDisplay {
+	width: 40%;
+	text-align: center;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 40px;
+	font-weight: bold;
+	color: black;
+	margin: 0px;
+	padding: 0px;
+}
+/* H button area */
+#hButton{
+	display: block;
+	cursor: pointer;
+	transition: all 0.2s;
+	margin-left: auto;
+	margin-right: auto;
+	position: absolute;
+    top: 50%;
+	left: 50%;
+    transform: translate(-50%, -50%);
+	height: 256px;
+	width: 256px;
+}
+#hButton:hover {
+	height: 230px;
+	width: 230px;
+}
+#hButton:active{
+	height: 270px;
+	width: 270px;
+	cursor: pointer;
+}
+#clickDisplay {
+	font-size: 40px;
+}
+
+/* H Shop */
+.hShop, .hShoptd {
+	border: 3px solid black;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+    border-spacing: 0;
+}
+.hShopTd {
+	width: 300px;
+	padding: 0;
+}
+.hShop {
+	table-layout: fixed;
+	width: 0px;
+}
+.shopText {
+	text-align: center;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 27px;
+	font-weight: bold;
+	color: black;
+	display: block;
+}
+.tallButton {
+	width: 100%;
+	height: 100%;
+	border: 3px solid black;
+	border-spacing: 0;
+	padding: 0;
+	text-align: center;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 27px;
+	font-weight: bold;
+	color: black;
+	display: block;
+}
+.tallButton:hover {
+	cursor: pointer;
+}
+.tallButton:disabled {
+	opacity: 50%;
+}
+.tallButton:disabled:hover {
+	cursor: url('Resources/h_cursor.png'), auto;
+}
+.smallButton {
+	border: 3px solid black;
+	border-spacing: 0;
+	padding: 0;
+	text-align: center;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 27px;
+	font-weight: bold;
+	color: black;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background-color:var(--middle-colour);
+}
+.round {
+	border-radius: 15px;
+	width: 150px;
+	height: 150px;
+	color:var(--textcolour);
+}
+@media (min-width: 1640px) {
+	.round2 {
+		border-radius: 10px;
+		width: 100px;
+		height: 100px;
+		font-size: 20px;
+		color:var(--textcolour);
+	}
+}
+@media (max-width: 1639px) {
+	.round2 {
+		border-radius: 10px;
+		width: 75px;
+		height: 75px;
+		font-size: 15px;
+		color:var(--textcolour);
+	}
+}
+.smallButton:hover {
+	background-color:var(--second-darkest);
+	cursor: pointer;
+}
+.smallButton:disabled {
+	background-color:var(--middle-colour);
+	opacity: 50%;
+}
+.smallButton:disabled:hover {
+	cursor: url('Resources/h_cursor.png'), auto;
+}
+/* H Business */
+.hBusinessTable, .hBusinessTd {
+	border: 3px solid black;
+	padding: 0;
+    border-spacing: 0;
+}
+.hBusinessTd {
+	width: 350px;
+	height: 0px;
+}
+.hBusinessTable {
+	table-layout: fixed;
+	width: 0px;
+	height: 100%;
+	bottom: 0px;
+	position: absolute;
+}
+/* Glod Shop */
+.glodShop, .glodShoptd {
+	border: 3px solid black;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+    border-spacing: 0;
+}
+.glodShopTd {
+	width: 5%;
+	padding: 0;
+}
+.glodShop {
+	table-layout: fixed;
+	width: 0px;
+}
+#mouseOver1, #mouseOver2 {
+	width: 500px;
+	height: 86px;
+	background-color: black;
+	opacity: 75%;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	font-family: 'Alegreya Sans', sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+	margin: 0px;
+	padding: 0px;
+	color: white;
+}
+.glodShopTd span {
+	display: none;
+	z-index: 13;
+}
+.glodShopTd:hover span {
+	display: block;
+	position: fixed;
+}
+/* Popups */
+#greyOut1, #greyOut2 {
+	opacity: 50%;
+	background-color: black;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 10;
+	left: 0px;
+	top: 0px;
+}
+#greyOut2 {
+	z-index: 12;
+}
+#hBusiness {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 50%;
+	left: 25%;
+	top: 25%;
+	position: absolute;
+	z-index: 11;
+	overflow-x: scroll;
+}
+#hMachine {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 75%;
+	left: 25%;
+	top: 12.5%;
+	position: absolute;
+	z-index: 11;
+}
+#glodShop {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 60%;
+	left: 25%;
+	top: 20%;
+	position: absolute;
+	z-index: 13;
+	background-color: var(--second-lightest);
+}
+#closeButton {
+	right: 0;
+	margin-right: 26%;
+	margin-top: 20px;
+	cursor: pointer;
+	border: 3px solid black;
+	border-radius: 50px;
+	width: 50px;
+	height: 50px;
+	position: fixed;
+	z-index: 14;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  height: 30px;
+  width: 30px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 3px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
