@@ -275,6 +275,17 @@ html {
 	z-index: 13;
 	background-color: var(--second-lightest);
 }
+#options {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 75%;
+	left: 25%;
+	top: 12.5%;
+	position: absolute;
+	z-index: 11;
+	background-color: var(--second-lightest);
+}
 #closeButton {
 	right: 0;
 	margin-right: 26%;

@@ -9,12 +9,12 @@
 		<link id="theme" rel="stylesheet" href="Themes/green.css">
     </head>
     <body onload="onStart()">
-		<title>H Clicker v0.25</title>
+		<title>H Clicker v0.3</title>
 		<div class="split top">
 		<table class="mainBar">
 			<tr>
 				<td class="mainBarTd"><button id="themeDisplay" type="button" class="tallButton" onclick="changeTheme(1)">Theme: Default</button></td>
-				<td class="mainBarTd"><button type="button" class="tallButton">Options</button></td>
+				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('options','1')">Options</button></td>
 				<td class="mainDisplay" id="currency"><p>0 Hs<br>0H/s</p></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hBusiness','1')">H Business</button></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hMachine','1')">The Machine</button></td>
@@ -86,15 +86,15 @@
 			<p id="glodHNuggetDisplay" class="shopText" style="font-size: 25px; margin: 0;">0 Glod H Nuggets</p>
 			<button type="button" class="smallButton round" onclick="popupWindow('glodShop','2')">Glod Shop</button>
 		</div>
-				<!--- Glod Shop -->
+				<!-- Glod Shop -->
 		<div id="glodShop" hidden="hidden">
 			<button type="button" onclick="closeWindow('glodShop','2')" id="closeButton"></button>
 			<p class="shopText" style="font-size: 45px; margin: 10px;">Glod Shop</p>
 			<p id="glodHNuggetDisplay2" class="shopText" style="font-size: 25px; margin: 0px;">0 Glod H Nuggets</p>
 			<table>
 				<tr>
-					<td class="glodShopTd"><span id="mouseOver1"><p>Increase glod limit to 100</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'limit')">5 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver2"><p>+1% Overall H boost per Glod H</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'power')">5 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver1"><p>Increase glod limit to 100</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'limit')">10 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver2"><p>+1% Overall H boost per Glod H</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'power')">10 Glod Nuggets</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
@@ -123,6 +123,10 @@
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
 				</tr>
 			</table>
+		</div>
+				<!-- Options Menu -->
+		<div id="options" hidden="hidden">
+			<button type="button" onclick="closeWindow('options','1')" id="closeButton"></button>
 		</div>
 	</body>
 </html>
