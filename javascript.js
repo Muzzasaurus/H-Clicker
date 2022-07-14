@@ -25,6 +25,7 @@ const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
 const prices = new Array(origprices.length);
 const rewards = new Array(origrewards.length)
 const trueRewards = new Array(rewards.length);
+const upgrNum = new Array(rewards.length);
 const flavours = ["Pencil", "Pen", "Printer", "Typewriter", "Keyboard", "Broken Keyboard", "Intern",
 "H Secret Cult", "Employee", "Shady Business Partner", "H File Tactics", "Psychological Warfare",
 "https://docs.google.com/document/d/1roD6zfNKjTEF-W3KmHWMI22GVrTtueUFx__ikHeNCfs/edit?usp=drivesdk",
@@ -35,15 +36,16 @@ upgradeNumber = prices.length;
 const businessPrices = new Array(origbusinessPrices.length);
 const businessRewards = new Array(origbusinessRewards.length);
 const trueBusinessRewards = new Array(businessRewards.length);
+const businessUpgrNum = new Array(businessRewards.length);
 const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning",
 "Sand H", "Mango H", "Volcanic asH", "Golf Ball h", "Kamilia's H", "Irwing", "Multidimensional H", 
 "Funny H", "Hilarious H", "Time Machine H", "Dragon H"]
 businessNumber = businessPrices.length;
 
 /* Glod Shop Arrays */
-const glodPrices = [10, 10]
-const glodRewards = [100, 0.01]
-const glodType = ["glodLimit", "glodPower"]
+const glodPrices = [5, 10, 250]
+const glodRewards = [100, 0.01, 250]
+const glodType = ["glodLimit", "glodPower", "glodLimit"]
 const isPurchased = new Array(origisPurchased.length);
 for (i=0; i<(isPurchased.length); i++) {
 		isPurchased[i]=origisPurchased[i];
@@ -72,10 +74,10 @@ function idle() {
 	document.getElementById("resetButton").innerHTML="Reset for " + potentialGlod + " Glod H (Limit: " + glodLimit +")";
 	document.getElementById("glodCountdown").innerHTML=Math.round(hRemaining) + " Hs left.";
 	for (i = 0; i < upgradeNumber; i++) {
-		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + "<br>(+" + Math.round(trueRewards[i]*10)/10 + " H/s)<br><br>" + Math.round(prices[i]*100)/100 + " Hs";
+		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + upgrNum[i] + ")<br>(+" + Math.round(trueRewards[i]*10)/10 + " H/s)<br><br>" + Math.round(prices[i]*100)/100 + " Hs";
 	}
 	for (i = 0; i < businessNumber; i++) {
-		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + "<br>(+" + Math.round(trueBusinessRewards[i]*10)/10 + " H/c)<br><br><br><br>" + Math.round(businessPrices[i]) + " Hs";
+		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + businessUpgrNum[i] + ")<br>(+" + Math.round(trueBusinessRewards[i]*10)/10 + " H/c)<br><br><br><br>" + Math.round(businessPrices[i]) + " Hs";
 	}
 	/*
 	for (i = 0; i < glodPrices.length; i++) {
@@ -122,11 +124,21 @@ function purchase(upnum) {
 	h-=prices[upnum-1];
 	autoH+=trueRewards[upnum-1];
 	prices[upnum-1]*=1.15;
+	upgrNum[upnum-1]+=1;
+	if (upgrNum[upnum-1] % 10 == 0) {
+		autoH+=upgrNum[upnum-1]*rewards[upnum-1];
+		rewards[upnum-1]*=2;
+	}
 }
 function purchaseBusiness(upnum) {
 	h-=businessPrices[upnum-1];
 	clickPower+=trueBusinessRewards[upnum-1];
 	businessPrices[upnum-1]*=1.4;
+	businessUpgrNum[upnum-1]+=1;
+	if (businessUpgrNum[upnum-1] % 5 == 0) {
+		clickPower+=businessUpgrNum[upnum-1]*businessRewards[upnum-1];
+		businessRewards[upnum-1]*=2;
+	}
 }
 function purchaseGlod(upnum, type) {
 	glodHNugget-=glodPrices[upnum-1];
@@ -228,12 +240,18 @@ function resetValues() {
 	clickPower=0;
 	autoH=0;
 	requirement=1000000000;
-	hRemaining=1000000000;
+	hRemaining=requirement;
 	for (i=0; i<(prices.length); i++) {
 		prices[i]=origprices[i];
 	}
 	for (i=0; i<(rewards.length); i++) {
 		rewards[i]=origrewards[i];
+	}
+	for (i=0; i<(upgrNum.length); i++) {
+		upgrNum[i]=0;
+	}
+	for (i=0; i<(businessUpgrNum.length); i++) {
+		businessUpgrNum[i]=0;
 	}
 	for (i=0; i<(businessPrices.length); i++) {
 		businessPrices[i]=origbusinessPrices[i];
