@@ -1,6 +1,6 @@
 /* Default Variables */
-const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 3000000000]
-const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, 4000000]
+const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 1000000000, 3000000000]
+const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, -5000000, 4000000]
 const origbusinessPrices = [10, 250, 750, 6500, 21000, 254254, 1000000, 4000000, 25000000, 40000000, 111111111, 254254254, 933748382, 6969696969, 50000000000, 175000000000]
 const origbusinessRewards = [0.1, 1, 3, 10, 70, 600, 1500, 3000, 9000, 15000, 51111, 84254, 187000, 500000, 3750000, 12500000]
 const origisPurchased = [0]
@@ -9,6 +9,7 @@ h=1;
 newH=0;
 clickPower=0;
 autoH=0;
+trueAutoH=0;
 theme=-1;
 potentialGlod=0;
 glodIncome=1;
@@ -16,6 +17,7 @@ glodH=0;
 glodHNugget=0;
 glodLimit=10;
 glodPower=0;
+glodBoost=0;
 requirement=1000000000;
 hRemaining=1000000000;
 const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
@@ -23,19 +25,17 @@ const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
 "Somebody Scream", "Hatsune Miku Colour Palette", "Hard Mode", "Eye Bleeding Mode", "Trans"];
 /* Flavour Arrays (H Per Second) */
 const prices = new Array(origprices.length);
-const rewards = new Array(origrewards.length)
-const trueRewards = new Array(rewards.length);
+const rewards = new Array(origrewards.length);
 const upgrNum = new Array(rewards.length);
 const flavours = ["Pencil", "Pen", "Printer", "Typewriter", "Keyboard", "Broken Keyboard", "Intern",
 "H Secret Cult", "Employee", "Shady Business Partner", "H File Tactics", "Psychological Warfare",
 "https://docs.google.com/document/d/1roD6zfNKjTEF-W3KmHWMI22GVrTtueUFx__ikHeNCfs/edit?usp=drivesdk",
-"Genetically Modified H Men", "H Colonization", "Dragon Employee"]
+"Genetically Modified H Men", "H Colonization", "Subservient Fish (blood for the blood god)", "Dragon Employee"]
 upgradeNumber = prices.length;
 
 /* Business Arrays (H Per Click) */
 const businessPrices = new Array(origbusinessPrices.length);
 const businessRewards = new Array(origbusinessRewards.length);
-const trueBusinessRewards = new Array(businessRewards.length);
 const businessUpgrNum = new Array(businessRewards.length);
 const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning",
 "Sand H", "Mango H", "Volcanic asH", "Golf Ball h", "Kamilia's H", "Irwing", "Multidimensional H", 
@@ -43,9 +43,8 @@ const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning
 businessNumber = businessPrices.length;
 
 /* Glod Shop Arrays */
-const glodPrices = [5, 10, 250]
-const glodRewards = [100, 0.01, 250]
-const glodType = ["glodLimit", "glodPower", "glodLimit"]
+const glodPrices = [10, 100, 250]
+const glodRewards = [0.1, 10, 30]
 const isPurchased = new Array(origisPurchased.length);
 for (i=0; i<(isPurchased.length); i++) {
 		isPurchased[i]=origisPurchased[i];
@@ -66,28 +65,28 @@ function checkIfNegative() {
 	}
 }
 function idle() {
-	document.getElementById("currency").innerHTML=Math.round(h) + " Hs<br>" + Math.round(autoH*10)/10 + "H/s";
-	document.getElementById("glodHDisplay").innerHTML=Math.round(glodH) + " Glod H";
-	document.getElementById("glodHNuggetDisplay").innerHTML=Math.round(glodHNugget) + " Glod H Nuggets";
-	document.getElementById("glodHNuggetDisplay2").innerHTML=Math.round(glodHNugget) + " Glod H Nuggets";
-	document.getElementById("clickDisplay").innerHTML=Math.round(clickPower*10)/10 + " H/c";
-	document.getElementById("resetButton").innerHTML="Reset for " + potentialGlod + " Glod H (Limit: " + glodLimit +")";
-	document.getElementById("glodCountdown").innerHTML=Math.round(hRemaining) + " Hs left.";
+	document.getElementById("currency").innerHTML=addCommas(Math.round(h)) + " Hs<br>" + addCommas(Math.round(trueAutoH*10)/10) + "H/s";
+	document.getElementById("glodHDisplay").innerHTML=addCommas(Math.round(glodH)) + " Glod H";
+	document.getElementById("glodHNuggetDisplay").innerHTML=addCommas(Math.round(glodHNugget)) + " Glod H Nuggets";
+	document.getElementById("glodHNuggetDisplay2").innerHTML=addCommas(Math.round(glodHNugget)) + " Glod H Nuggets";
+	document.getElementById("clickDisplay").innerHTML=addCommas(Math.round(clickPower*10)/10) + " H/c";
+	document.getElementById("resetButton").innerHTML="Reset for " + addCommas(potentialGlod) + " Glod H (Limit: " + addCommas(glodLimit) +")";
+	document.getElementById("glodCountdown").innerHTML=addCommas(Math.round(hRemaining)) + " Hs left.";
 	for (i = 0; i < upgradeNumber; i++) {
-		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + upgrNum[i] + ")<br>(+" + Math.round(trueRewards[i]*10)/10 + " H/s)<br><br>" + Math.round(prices[i]*100)/100 + " Hs";
+		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(upgrNum[i]) + ")<br>(+" + addCommas(Math.round((rewards[i]*glodBoost)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(prices[i]*10)/10) + " Hs";
 	}
 	for (i = 0; i < businessNumber; i++) {
-		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + businessUpgrNum[i] + ")<br>(+" + Math.round(trueBusinessRewards[i]*10)/10 + " H/c)<br><br><br><br>" + Math.round(businessPrices[i]) + " Hs";
+		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((businessRewards[i]*glodBoost)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(businessPrices[i])) + " Hs";
 	}
 	/*
 	for (i = 0; i < glodPrices.length; i++) {
 		document.getElementById(`glodUpgrade${i+1}`).innerHTML=businessNames[i] + "<br>(+" + Math.round(trueBusinessRewards[i]*10)/10 + " H/c)<br><br><br><br><br>" + Math.round(businessPrices[i]) + " Hs";
 	}
 	*/
-	h+=(autoH/40);
-	newH+=(autoH/40);
+	h+=(trueAutoH/40);
+	newH+=(trueAutoH/40);
 	glodBoost=(glodH*glodPower)+1;
-	rewardBoost();
+	trueAutoH=autoH*glodBoost;
 	canAfford();
 	potentialCheck();
 	checkIfNegative();
@@ -122,17 +121,17 @@ function canAfford() {
 /* Purchases */
 function purchase(upnum) {
 	h-=prices[upnum-1];
-	autoH+=trueRewards[upnum-1];
+	autoH+=rewards[upnum-1]*glodBoost;
 	prices[upnum-1]*=1.15;
 	upgrNum[upnum-1]+=1;
 	if (upgrNum[upnum-1] % 10 == 0) {
-		autoH+=upgrNum[upnum-1]*rewards[upnum-1];
+		autoH+=upgrNum[upnum-1]*rewards[upnum-1]*glodBoost;
 		rewards[upnum-1]*=2;
 	}
 }
 function purchaseBusiness(upnum) {
 	h-=businessPrices[upnum-1];
-	clickPower+=trueBusinessRewards[upnum-1];
+	clickPower+=businessRewards[upnum-1]*glodBoost;
 	businessPrices[upnum-1]*=1.4;
 	businessUpgrNum[upnum-1]+=1;
 	if (businessUpgrNum[upnum-1] % 5 == 0) {
@@ -144,7 +143,7 @@ function purchaseGlod(upnum, type) {
 	glodHNugget-=glodPrices[upnum-1];
 	isPurchased[upnum-1]=1;
 	if (type == "limit") {
-		glodLimit=glodRewards[upnum-1];
+		glodLimit+=glodRewards[upnum-1];
 	}
 	if (type == "power") {
 		glodPower+=glodRewards[upnum-1];
@@ -175,14 +174,6 @@ function glodPrestige() {
 	glodH+=potentialGlod;
 	glodHNugget+=potentialGlod;
 	potentialGlod=0;
-}
-function rewardBoost() {
-	for (i=0; i<(rewards.length); i++) {
-		trueRewards[i] = rewards[i]*glodBoost;
-	}
-	for (i=0; i<(businessRewards.length); i++) {
-		trueBusinessRewards[i] = businessRewards[i]*glodBoost;
-	}
 }
 window.onmousemove = function (e) {
     var x = e.clientX;
@@ -233,7 +224,9 @@ function changeTheme(scrollrate) {
 	document.getElementById("theme").href = `Themes/${themes[theme]}.css`;
 	document.getElementById("themeDisplay").innerHTML="Theme: " + themes[theme];
 }
-
+function addCommas(num) {
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function resetValues() {
 	h=1;
 	newH=0;
