@@ -1,8 +1,8 @@
 /* Default Variables */
 const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 3000000000]
 const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, 4000000]
-const origbusinessPrices = [10, 250, 750, 6500, 21000, 254254, 1000000, 4000000, 25000000, 40000000, 111111111, 254254254, 6969696969, 50000000000, 175000000000]
-const origbusinessRewards = [0.1, 1, 3, 10, 70, 600, 1500, 3000, 9000, 15000, 51111, 84254, 150000, 750000, 1250000]
+const origbusinessPrices = [10, 250, 750, 6500, 21000, 254254, 1000000, 4000000, 25000000, 40000000, 111111111, 254254254, 933748382, 6969696969, 50000000000, 175000000000]
+const origbusinessRewards = [0.1, 1, 3, 10, 70, 600, 1500, 3000, 9000, 15000, 51111, 84254, 187000, 500000, 3750000, 12500000]
 const origisPurchased = [0]
 /* Declaring Variables */
 h=1;
@@ -39,7 +39,7 @@ const trueBusinessRewards = new Array(businessRewards.length);
 const businessUpgrNum = new Array(businessRewards.length);
 const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning",
 "Sand H", "Mango H", "Volcanic asH", "Golf Ball h", "Kamilia's H", "Irwing", "Multidimensional H", 
-"Funny H", "Hilarious H", "Time Machine H", "Dragon H"]
+"Funny H", "Novalis by GrilleX", "Hilarious H", "Time Machine H", "Dragon H"]
 businessNumber = businessPrices.length;
 
 /* Glod Shop Arrays */
