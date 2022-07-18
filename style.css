@@ -206,7 +206,7 @@ html {
 	table-layout: fixed;
 	width: 0px;
 }
-#mouseOver1, #mouseOver2, #mouseOver3 {
+#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4 {
 	width: 500px;
 	height: 86px;
 	background-color: black;
