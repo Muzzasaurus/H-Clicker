@@ -57,7 +57,6 @@ function onStart() {
 	resetValues();
 	changeTheme(1);
 	idle();
-	load();
 }
 function increment() {
 	h+=trueClickPower;
