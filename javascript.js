@@ -126,40 +126,49 @@ function canAfford() {
 }
 /* Purchases */
 function purchase(upnum) {
-	h-=prices[upnum-1];
-	autoH+=rewards[upnum-1];
-	prices[upnum-1]*=1.15;
-	upgrNum[upnum-1]+=1;
-	if (upgrNum[upnum-1] % 10 == 0) {
-		autoH+=upgrNum[upnum-1]*rewards[upnum-1];
-		rewards[upnum-1]*=2;
+	if (h < prices[upnum-1]) {
+	} else {
+		h-=prices[upnum-1];
+		autoH+=rewards[upnum-1];
+		prices[upnum-1]*=1.15;
+		upgrNum[upnum-1]+=1;
+		if (upgrNum[upnum-1] % 10 == 0) {
+			autoH+=upgrNum[upnum-1]*rewards[upnum-1];
+			rewards[upnum-1]*=2;
+		}
 	}
 }
 function purchaseBusiness(upnum) {
-	h-=businessPrices[upnum-1];
-	clickPower+=businessRewards[upnum-1];
-	businessPrices[upnum-1]*=1.4;
-	businessUpgrNum[upnum-1]+=1;
-	if (businessUpgrNum[upnum-1] % 5 == 0) {
-		clickPower+=businessUpgrNum[upnum-1]*businessRewards[upnum-1];
-		businessRewards[upnum-1]*=2;
+	if (h < businessPrices[upnum-1]) {
+	} else {
+		h-=businessPrices[upnum-1];
+		clickPower+=businessRewards[upnum-1];
+		businessPrices[upnum-1]*=1.4;
+		businessUpgrNum[upnum-1]+=1;
+		if (businessUpgrNum[upnum-1] % 5 == 0) {
+			clickPower+=businessUpgrNum[upnum-1]*businessRewards[upnum-1];
+			businessRewards[upnum-1]*=2;
+		}
 	}
 }
 function purchaseGlod(upnum, type) {
-	glodHNugget-=glodPrices[upnum-1];
-	isPurchased[upnum-1]=1;
-	if (type == "limit") {
-		glodLimit+=glodRewards[upnum-1];
-	}
-	if (type == "power") {
-		glodPower+=glodRewards[upnum-1];
-	}
-	if (type == "startingHPC") {
-		startingHPC+=glodRewards[upnum-1];
-		clickPower+=glodRewards[upnum-1]/glodBoost;
-	}
-	if (type == "conditionalLimit") {
-		presToLimit+=glodRewards[upnum-1];
+	if (glodHNugget < glodPrices[upnum-1]) {
+	} else {
+		glodHNugget-=glodPrices[upnum-1];
+		isPurchased[upnum-1]=1;
+		if (type == "limit") {
+			glodLimit+=glodRewards[upnum-1];
+		}
+		if (type == "power") {
+			glodPower+=glodRewards[upnum-1];
+		}
+		if (type == "startingHPC") {
+			startingHPC+=glodRewards[upnum-1];
+			clickPower+=glodRewards[upnum-1]/glodBoost;
+		}
+		if (type == "conditionalLimit") {
+			presToLimit+=glodRewards[upnum-1];
+		}
 	}
 }
 function calculateLimit() {
