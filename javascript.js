@@ -18,36 +18,37 @@ glodIncome=1;
 glodH=0;
 glodHNugget=0;
 glodLimit=10;
+trueGlodLimit=10;
 glodPower=0;
 glodBoost=1;
+prestiges=0;
+presToLimit=0;
 requirement=1000000000;
 hRemaining=1000000000;
 const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
 "Light Blue", "Orangey", "Green", "Fate", "Cheese Pyramid", "Papyrus Undertale",
 "Somebody Scream", "Hatsune Miku Colour Palette", "Hard Mode", "Eye Bleeding Mode", "Trans"];
 /* Flavour Arrays (H Per Second) */
-const prices = new Array(origprices.length);
-const rewards = new Array(origrewards.length);
-const upgrNum = new Array(rewards.length);
+prices = new Array(origprices.length);
+rewards = new Array(origrewards.length);
+upgrNum = new Array(rewards.length);
 const flavours = ["Pencil", "Pen", "Printer", "Typewriter", "Keyboard", "Broken Keyboard", "Intern",
 "H Secret Cult", "Employee", "Shady Business Partner", "H File Tactics", "Psychological Warfare",
 "https://docs.google.com/document/d/1roD6zfNKjTEF-W3KmHWMI22GVrTtueUFx__ikHeNCfs/edit?usp=drivesdk",
 "Genetically Modified H Men", "H Colonization", "Subservient Fish (blood for the blood god)", "Dragon Employee", "Random"]
-upgradeNumber = prices.length;
 
 /* Business Arrays (H Per Click) */
-const businessPrices = new Array(origbusinessPrices.length);
-const businessRewards = new Array(origbusinessRewards.length);
-const businessUpgrNum = new Array(businessRewards.length);
+businessPrices = new Array(origbusinessPrices.length);
+businessRewards = new Array(origbusinessRewards.length);
+businessUpgrNum = new Array(businessRewards.length);
 const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning",
 "Sand H", "Mango H", "Volcanic asH", "Golf Ball h", "Kamilia's H", "Irwing", "Multidimensional H", 
 "Funny H", "Novalis by GrilleX", "Hilarious H", "Time Machine H", "Dragon H"]
-businessNumber = businessPrices.length;
 
 /* Glod Shop Arrays */
-const glodPrices = [10, 100, 250, 500]
-const glodRewards = [0.1, 10, 30, 1]
-const isPurchased = new Array(origisPurchased.length);
+glodPrices = [10, 25, 50, 150, 300]
+glodRewards = [0.1, 1, 10, 30, 1]
+isPurchased = new Array(origisPurchased.length);
 for (i=0; i<(isPurchased.length); i++) {
 		isPurchased[i]=origisPurchased[i];
 }
@@ -56,6 +57,7 @@ function onStart() {
 	resetValues();
 	changeTheme(1);
 	idle();
+	load();
 }
 function increment() {
 	h+=trueClickPower;
@@ -71,25 +73,22 @@ function idle() {
 	document.getElementById("glodHDisplay").innerHTML=addCommas(Math.round(glodH)) + " Glod H";
 	document.getElementById("glodHNuggetDisplay").innerHTML=addCommas(Math.round(glodHNugget)) + " Glod H Nuggets";
 	document.getElementById("glodHNuggetDisplay2").innerHTML=addCommas(Math.round(glodHNugget)) + " Glod H Nuggets";
+	document.getElementById("prestigeCount").innerHTML="Increase glod limit by number of presiges (" + addCommas(Math.round(prestiges)) + " prestiges)";
 	document.getElementById("clickDisplay").innerHTML=addCommas(Math.round(trueClickPower*10)/10) + " H/c";
-	document.getElementById("resetButton").innerHTML="Reset for " + addCommas(potentialGlod) + " Glod H (Limit: " + addCommas(glodLimit) +")";
+	document.getElementById("resetButton").innerHTML="Reset for " + addCommas(potentialGlod) + " Glod H (Limit: " + addCommas(trueGlodLimit) +")";
 	document.getElementById("glodCountdown").innerHTML=addCommas(Math.round(hRemaining)) + " Hs left.";
-	for (i = 0; i < upgradeNumber; i++) {
+	for (i = 0; i < prices.length; i++) {
 		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(upgrNum[i]) + ")<br>(+" + addCommas(Math.round((rewards[i]*glodBoost)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(prices[i]*1)/1) + " Hs";
 	}
-	for (i = 0; i < businessNumber; i++) {
+	for (i = 0; i < businessPrices.length; i++) {
 		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((businessRewards[i]*glodBoost)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(businessPrices[i])) + " Hs";
 	}
-	/*
-	for (i = 0; i < glodPrices.length; i++) {
-		document.getElementById(`glodUpgrade${i+1}`).innerHTML=businessNames[i] + "<br>(+" + Math.round(trueBusinessRewards[i]*10)/10 + " H/c)<br><br><br><br><br>" + Math.round(businessPrices[i]) + " Hs";
-	}
-	*/
 	h+=(trueAutoH/40);
 	newH+=(trueAutoH/40);
 	glodBoost=(glodH*glodPower)+1;
 	trueAutoH=autoH*glodBoost;
 	trueClickPower=clickPower*glodBoost;
+	calculateLimit();
 	canAfford();
 	potentialCheck();
 	checkIfNegative();
@@ -97,14 +96,14 @@ function idle() {
 }
 /* Price checks */
 function canAfford() {
-	for (i = 0; i < upgradeNumber; i++) {
+	for (i = 0; i < prices.length; i++) {
 		if (h < prices[i]) {
 			document.getElementById(`hUpgrade${i+1}`).setAttribute ("disabled", "true");
 		} else {
 			document.getElementById(`hUpgrade${i+1}`).removeAttribute("disabled");
 		}
 	}
-	for (i = 0; i < businessNumber; i++) {
+	for (i = 0; i < businessPrices.length; i++) {
 		if (h < businessPrices[i]) {
 			document.getElementById(`hBusiness${i+1}`).setAttribute ("disabled", "true");
 		} else {
@@ -119,6 +118,11 @@ function canAfford() {
 		} else {
 			document.getElementById(`glodUpgrade${i+1}`).removeAttribute("disabled");
 		}
+	}
+	if (potentialGlod <= 0) {
+		document.getElementById("resetButton").setAttribute ("disabled", "true");
+	} else {
+		document.getElementById("resetButton").removeAttribute("disabled");
 	}
 }
 /* Purchases */
@@ -155,10 +159,16 @@ function purchaseGlod(upnum, type) {
 		startingHPC+=glodRewards[upnum-1];
 		clickPower+=glodRewards[upnum-1]/glodBoost;
 	}
+	if (type == "conditionalLimit") {
+		presToLimit+=glodRewards[upnum-1];
+	}
+}
+function calculateLimit() {
+	trueGlodLimit=glodLimit+(prestiges*presToLimit);
 }
 /* Glod H */
 function potentialCheck() {
-	if (potentialGlod < glodLimit) {
+	if (potentialGlod < trueGlodLimit) {
 		if (newH >= requirement) {
 			potentialGlod+=(glodIncome*(Math.floor(newH/requirement)));
 			requirement+=(Math.floor(newH/requirement))*10;
@@ -169,11 +179,11 @@ function potentialCheck() {
 		hRemaining=requirement;
 		newH=0;
 	}
-	if (potentialGlod > glodLimit) {
-		potentialGlod = glodLimit;
+	if (potentialGlod > trueGlodLimit) {
+		potentialGlod = trueGlodLimit;
 	}
-	if (requirement > 1000000000+(glodLimit*10)) {
-		requirement = 1000000000+(glodLimit*10);
+	if (requirement > 1000000000+(trueGlodLimit*10)) {
+		requirement = 1000000000+(trueGlodLimit*10);
 	}
 }
 function glodPrestige() {
@@ -181,15 +191,9 @@ function glodPrestige() {
 	glodH+=potentialGlod;
 	glodHNugget+=potentialGlod;
 	potentialGlod=0;
+	prestiges++;
 }
-window.onmousemove = function (e) {
-    var x = e.clientX;
-	var y = e.clientY;
-	for (i = 0; i < glodPrices.length; i++) {
-		document.getElementById(`mouseOver${i+1}`).style.top = (y - 110) + "px";
-		document.getElementById(`mouseOver${i+1}`).style.left = (x - 250) + "px";
-	}
-};
+
 /* Popups */
 function popupWindow(screenName, shade) {
 	document.getElementById(`greyOut${shade}`).style.display="block";
@@ -198,6 +202,13 @@ function popupWindow(screenName, shade) {
 function closeWindow(screenName, shade) {
 	document.getElementById(`greyOut${shade}`).style.display="none";
 	document.getElementById(`${screenName}`).style.display="none";
+}
+function closeAll() {
+	closeWindow('hBusiness','1');
+	closeWindow('hMachine','1');
+	closeWindow('glodShop','2');
+	closeWindow('options','1');
+	closeWindow('shortcuts','1');
 }
 /* Hotkeys */
 document.addEventListener('keydown', function(event) {
@@ -217,13 +228,28 @@ document.addEventListener('keydown', function(event) {
 }, true);
 document.addEventListener('keydown', function(event) {
 	if (event.keyCode == 27) { /* ESC Key (closes popups) */
-		closeWindow('hBusiness','1');
-		closeWindow('hMachine','1');
-		closeWindow('glodShop','2');
-		closeWindow('options','1');
+		closeAll();
+	}
+}, true);
+document.addEventListener('keydown', function(event) {
+	if (event.keyCode == 49) { /* 1 Key (closes all popups) */
+		closeAll();
+	}
+}, true);
+document.addEventListener('keydown', function(event) {
+	if (event.keyCode == 50) { /* 2 Key (opens H business) */
+		closeAll();
+		popupWindow('hBusiness','1');
+	}
+}, true);
+document.addEventListener('keydown', function(event) {
+	if (event.keyCode == 51) { /* 3 Key (opens the machine) */
+		closeAll();
+		popupWindow('hMachine','1');
 	}
 }, true);
 
+/* Miscellaneous functions */
 function changeTheme(scrollrate) {
 	theme+=scrollrate;
 	if (theme == (themes.length)) theme = 0;
@@ -234,6 +260,14 @@ function changeTheme(scrollrate) {
 function addCommas(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+window.onmousemove = function (e) {
+    var x = e.clientX;
+	var y = e.clientY;
+	for (i = 0; i < glodPrices.length; i++) {
+		document.getElementById(`mouseOver${i+1}`).style.top = (y - 110) + "px";
+		document.getElementById(`mouseOver${i+1}`).style.left = (x - 250) + "px";
+	}
+};
 function resetValues() {
 	autoH=0;
 	trueAutoH=0;
@@ -261,4 +295,66 @@ function resetValues() {
 	}
 	h=1;
 	newH=0;
+}
+function resetAll() {
+	save();
+	resetValues();
+	potentialGlod=0;
+	glodIncome=1;
+	glodH=0;
+	glodHNugget=0;
+	glodLimit=10;
+	trueGlodLimit=10;
+	glodPower=0;
+	glodBoost=1;
+	prestiges=0;
+	presToLimit=0;
+	requirement=1000000000;
+	hRemaining=1000000000;
+}
+/* Save and Load progress */
+const numericalValues = ["h", "clickPower", "startingHPC", "autoH", "theme", "potentialGlod", "glodIncome", "glodH", 
+"glodHNugget", "glodLimit", "glodPower", "glodBoost", "prestiges", "presToLimit", "requirement", "hRemaining"]
+function save() {
+	for (i = 0; i < numericalValues.length; i++) {
+		tempNum = Function(`return ${numericalValues[i]}`)();
+		localStorage.setItem(`${numericalValues[i]}`, tempNum);
+	}
+	localStorage.prices = JSON.stringify(prices);
+	localStorage.rewards = JSON.stringify(rewards);
+	localStorage.upgrNum = JSON.stringify(upgrNum);
+	localStorage.businessPrices = JSON.stringify(businessPrices);
+	localStorage.businessRewards = JSON.stringify(businessRewards);
+	localStorage.businessUpgrNum = JSON.stringify(businessUpgrNum);
+	localStorage.glodPrices = JSON.stringify(glodPrices);
+	localStorage.glodRewards = JSON.stringify(glodRewards);
+	localStorage.isPurchased = JSON.stringify(isPurchased);
+}
+function load() {
+	for (i = 0; i < numericalValues.length; i++) {
+		varName = Function(`return ${numericalValues[i]}`)();
+		if (varName !== "undefined") {
+			varType = Function("return " + "numericalValues[i]")();
+			window[varType] = Number(localStorage.getItem(`${numericalValues[i]}`));
+		}
+	}
+	changeTheme(0);
+	if (localStorage.prices)
+	prices = JSON.parse(localStorage.prices);
+	if (localStorage.rewards)
+	rewards = JSON.parse(localStorage.rewards);
+	if (localStorage.upgrNum)
+	upgrNum = JSON.parse(localStorage.upgrNum);
+	if (localStorage.businessPrices)
+	businessPrices = JSON.parse(localStorage.businessPrices);
+	if (localStorage.businessRewards)
+	businessRewards = JSON.parse(localStorage.businessRewards);
+	if (localStorage.businessUpgrNum)
+	businessUpgrNum = JSON.parse(localStorage.businessUpgrNum);
+	if (localStorage.glodPrices)
+	glodPrices = JSON.parse(localStorage.glodPrices);
+	if (localStorage.glodRewards)
+	glodRewards = JSON.parse(localStorage.glodRewards);
+	if (localStorage.isPurchased)
+	isPurchased = JSON.parse(localStorage.isPurchased);
 }

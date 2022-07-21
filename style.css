@@ -153,12 +153,30 @@ html {
 		color:var(--textcolour);
 	}
 }
-@media (max-width: 1639px) {
+@media (max-width: 1640px) {
 	.round2 {
 		border-radius: 10px;
 		width: 75px;
 		height: 75px;
 		font-size: 15px;
+		color:var(--textcolour);
+	}
+}
+@media (max-width: 1220px) {
+	.round2 {
+		border-radius: 10px;
+		width: 50px;
+		height: 50px;
+		font-size: 10px;
+		color:var(--textcolour);
+	}
+}
+@media (max-width: 870px) {
+	.round2 {
+		border-radius: 10px;
+		width: 40px;
+		height: 40px;
+		font-size: 8px;
 		color:var(--textcolour);
 	}
 }
@@ -206,7 +224,7 @@ html {
 	table-layout: fixed;
 	width: 0px;
 }
-#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4 {
+#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4, #mouseOver5 {
 	width: 500px;
 	height: 86px;
 	background-color: black;
@@ -228,6 +246,52 @@ html {
 .glodShopTd:hover span {
 	display: block;
 	position: fixed;
+}
+/* Options Menu */
+.optionsTd {
+	width: 5%;
+	table-layout: fixed;
+	padding: 0;
+}
+.optionsButton {
+	border-radius: 10px;
+	font-size: 30px;
+	width: 250px;
+	height: 100px;
+	color:var(--textcolour);
+}
+@media (min-width: 1530px) {
+	.optionsButton {
+		width: 250px;
+		height: 100px;
+	}
+}
+@media (max-width: 1530px) {
+	.optionsButton {
+		width: 200px;
+		height: 75px;
+		font-size: 24px;
+	}
+} 
+@media (max-width: 1230px) {
+	.optionsButton {
+		width: 150px;
+		height: 65px;
+		font-size: 17px;
+	}
+} 
+@media (max-width: 900px) {
+	.optionsButton {
+		width: 100px;
+		height: 50px;
+		font-size: 12px;
+	}
+} 
+/* Shortcuts Menu */
+.shortcutsTd {
+	table-layout: fixed;
+	width: 50%;
+	padding: 10px;
 }
 /* Popups */
 #greyOut1, #greyOut2 {
@@ -276,6 +340,17 @@ html {
 	background-color: var(--second-lightest);
 }
 #options {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 75%;
+	left: 25%;
+	top: 12.5%;
+	position: absolute;
+	z-index: 11;
+	background-color: var(--second-lightest);
+}
+#shortcuts {
 	border: 5px solid black;
 	border-radius: 15px;
 	width: 50%;

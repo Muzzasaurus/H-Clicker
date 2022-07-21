@@ -13,7 +13,7 @@
 		<div class="split top">
 		<table class="mainBar">
 			<tr>
-				<td class="mainBarTd"><button id="themeDisplay" type="button" class="tallButton" onclick="changeTheme(1)">Theme: Default</button></td>
+				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('shortcuts', '1')">Keyboard Shortcuts</button></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('options','1')">Options</button></td>
 				<td class="mainDisplay" id="currency"><p>0 Hs<br>0H/s</p></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hBusiness','1')">H Business</button></td>
@@ -23,7 +23,7 @@
 		</div>
 		<div class="split middle">
 			<img id="hButton" src="Resources/h.png" onclick="increment()"></button>
-			<p id="clickDisplay" class="shopText">1 H/c</p>
+			<p id="clickDisplay" class="shopText">0 H/c</p>
 		</div>
 		<div class="split bottom">
 		<table class="hShop">
@@ -97,10 +97,10 @@
 			<table>
 				<tr>
 					<td class="glodShopTd"><span id="mouseOver1"><p>+10% Overall H boost per Glod H</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'power')">10 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver2"><p>Increase glod limit by 10</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'limit')">100 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver3"><p>Increase glod limit by 30</p></span><button id="glodUpgrade3" type="button" class="smallButton round2" onclick="purchaseGlod(3, 'limit')">250 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver4"><p>Gain +1 H/c at the start of the game</p></span><button id="glodUpgrade4" type="button" class="smallButton round2" onclick="purchaseGlod(4, 'startingHPC')">500 Glod Nuggets</button></td>
-					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
+					<td class="glodShopTd"><span id="mouseOver2"><p>Gain +1 H/c at the start of the game</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'startingHPC')">25 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver3"><p>Increase glod limit by 10</p></span><button id="glodUpgrade3" type="button" class="smallButton round2" onclick="purchaseGlod(3, 'limit')">50 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver4"><p>Increase glod limit by 30</p></span><button id="glodUpgrade4" type="button" class="smallButton round2" onclick="purchaseGlod(4, 'limit')">150 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span id="mouseOver5"><p id="prestigeCount">Increase glod limit by number of presiges (0 prestiges)</p></span><button id="glodUpgrade5" type="button" class="smallButton round2" onclick="purchaseGlod(5, 'conditionalLimit')">300 Glod Nuggets</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1% Glod H Boost</button></td>
 					<td class="glodShopTd"><button type="button" class="smallButton round2">+1 Glod H limit</button></td>
@@ -130,6 +130,27 @@
 				<!-- Options Menu -->
 		<div id="options" hidden="hidden">
 			<button type="button" onclick="closeWindow('options','1')" id="closeButton"></button>
+			<table>
+				<tr>
+					<td class="optionsTd"><button id="themeDisplay" type="button" class="smallButton optionsButton" onclick="changeTheme(1)">Theme: Default</button></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="save()">Save</button></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="load()">Load</button></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="resetAll()">RESET</button></td>
+				</tr>
+			</table>
+		</div>
+				<!-- Shortcuts Menu -->
+		<div id="shortcuts" hidden="hidden">
+			<button type="button" onclick="closeWindow('shortcuts','1')" id="closeButton"></button>
+			<table style="width:100%;">
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="text-align:left;font-size:50px;">Close Menu</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="text-align:left;">Esc</p></td>
+				</td>
+			</table>
 		</div>
 	</body>
 </html>
