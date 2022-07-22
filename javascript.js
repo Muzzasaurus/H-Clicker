@@ -25,9 +25,14 @@ prestiges=0;
 presToLimit=0;
 requirement=1000000000;
 hRemaining=1000000000;
+tickSpeed=40;
+saveTime=60;
+autoSaveState=1;
+saveTimer=60000;
 const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
 "Light Blue", "Orangey", "Green", "Fate", "Cheese Pyramid", "Papyrus Undertale",
-"Somebody Scream", "Hatsune Miku Colour Palette", "Hard Mode", "Eye Bleeding Mode", "Trans"];
+"Somebody Scream", "Hatsune Miku Colour Palette", "Hard Mode", "Eye Bleeding Mode",
+"Kazakh", "Azeri", "Trans"];
 /* Flavour Arrays (H Per Second) */
 prices = new Array(origprices.length);
 rewards = new Array(origrewards.length);
@@ -57,6 +62,11 @@ function onStart() {
 	resetValues();
 	changeTheme(1);
 	idle();
+	savedH = Number(localStorage.getItem(`${numericalValues[0]}`));
+	if (savedH !== 0) {
+		load();
+	}
+	autoSaver();
 }
 function increment() {
 	h+=trueClickPower;
@@ -82,8 +92,8 @@ function idle() {
 	for (i = 0; i < businessPrices.length; i++) {
 		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((businessRewards[i]*glodBoost)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(businessPrices[i])) + " Hs";
 	}
-	h+=(trueAutoH/40);
-	newH+=(trueAutoH/40);
+	h+=(trueAutoH/tickSpeed);
+	newH+=(trueAutoH/tickSpeed);
 	glodBoost=(glodH*glodPower)+1;
 	trueAutoH=autoH*glodBoost;
 	trueClickPower=clickPower*glodBoost;
@@ -91,7 +101,7 @@ function idle() {
 	canAfford();
 	potentialCheck();
 	checkIfNegative();
-	setTimeout(idle, 25);
+	setTimeout(idle, (1000/tickSpeed));
 }
 /* Price checks */
 function canAfford() {
@@ -217,6 +227,7 @@ function closeAll() {
 	closeWindow('glodShop','2');
 	closeWindow('options','1');
 	closeWindow('shortcuts','1');
+	closeWindow('confirmation','1');
 }
 /* Hotkeys */
 document.addEventListener('keydown', function(event) {
@@ -256,7 +267,41 @@ document.addEventListener('keydown', function(event) {
 		popupWindow('hMachine','1');
 	}
 }, true);
-
+document.addEventListener('keydown', function(event) {
+	if (event.keyCode == 83) { /* S key (saves game) */
+		save();
+	}
+}, true);
+/* Options */
+function updateSlider() {
+	tickSpeed=document.getElementById("tickSlider").value;
+	document.getElementById("tickDisplay").innerHTML = `Tickspeed (${tickSpeed})`;
+}
+function autoSave() {
+	saveTime=document.getElementById("autoSlider").value;
+	document.getElementById("autoSaveDisplay").innerHTML = `Autosave: ON (${saveTime}s)`;
+	clearTimeout(saveTimer);
+	autoSaver();
+}
+function autoSaver() {
+	if (autoSaveState == 1) {
+		save();
+		saveTimer = setTimeout(autoSaver, saveTime*1000);
+	}
+}
+function autoChange() {
+	if (autoSaveState == 1) {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
+		document.getElementById("autoSlider").style.display = "none";
+		clearTimeout(saveTimer);
+		autoSaveState = 0;
+	} else {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: ON (${saveTime}s)`
+		document.getElementById("autoSlider").style.display = "inline-block";
+		autoSaveState = 1;
+		autoSaver();
+	}
+}
 /* Miscellaneous functions */
 function changeTheme(scrollrate) {
 	theme+=scrollrate;
@@ -283,6 +328,9 @@ function resetValues() {
 	trueClickPower=0;
 	requirement=1000000000;
 	hRemaining=requirement;
+	autoSaveState=0;
+	document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
+		document.getElementById("autoSlider").style.display = "none";
 	for (i=0; i<(prices.length); i++) {
 		prices[i]=origprices[i];
 	}
@@ -305,8 +353,8 @@ function resetValues() {
 	newH=0;
 }
 function resetAll() {
-	save();
 	resetValues();
+	closeWindow('confirmation', '2');
 	potentialGlod=0;
 	glodIncome=1;
 	glodH=0;
@@ -322,7 +370,8 @@ function resetAll() {
 }
 /* Save and Load progress */
 const numericalValues = ["h", "clickPower", "startingHPC", "autoH", "theme", "potentialGlod", "glodIncome", "glodH", 
-"glodHNugget", "glodLimit", "glodPower", "glodBoost", "prestiges", "presToLimit", "requirement", "hRemaining"]
+"glodHNugget", "glodLimit", "glodPower", "glodBoost", "prestiges", "presToLimit", "requirement", "hRemaining", "tickSpeed",
+"saveTime", "autoSaveState"]
 function save() {
 	for (i = 0; i < numericalValues.length; i++) {
 		tempNum = Function(`return ${numericalValues[i]}`)();
@@ -347,6 +396,16 @@ function load() {
 		}
 	}
 	changeTheme(0);
+	document.getElementById("tickDisplay").innerHTML = `Tickspeed (${tickSpeed})`;
+	document.getElementById("tickSlider").value=tickSpeed;
+	if (autoSaveState == 0) {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
+		document.getElementById("autoSlider").style.display = "none";
+	} else {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: ON (${saveTime}s)`
+		document.getElementById("autoSlider").style.display = "inline-block";
+		document.getElementById("autoSlider").value=saveTime;
+	}
 	if (localStorage.prices)
 	prices = JSON.parse(localStorage.prices);
 	if (localStorage.rewards)

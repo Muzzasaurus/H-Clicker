@@ -29,24 +29,24 @@
 		<table class="hShop">
 			<tr>
 				<!-- H Shop (H Per Second) -->
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade1" onclick="purchase(1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade2" onclick="purchase(2)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade3" onclick="purchase(3)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade4" onclick="purchase(4)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade5" onclick="purchase(5)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade6" onclick="purchase(6)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade7" onclick="purchase(7)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade8" onclick="purchase(8)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade9" onclick="purchase(9)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade10" onclick="purchase(10)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade11" onclick="purchase(11)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade12" onclick="purchase(12)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade13" onclick="purchase(13)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade14" onclick="purchase(14)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade15" onclick="purchase(15)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade16" onclick="purchase(16)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade17" onclick="purchase(17)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton" id="hUpgrade18" onclick="purchase(18)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade1" onclick="purchase(1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade2" onclick="purchase(2)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade3" onclick="purchase(3)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade4" onclick="purchase(4)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade5" onclick="purchase(5)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade6" onclick="purchase(6)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade7" onclick="purchase(7)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade8" onclick="purchase(8)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade9" onclick="purchase(9)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade10" onclick="purchase(10)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade11" onclick="purchase(11)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade12" onclick="purchase(12)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade13" onclick="purchase(13)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade14" onclick="purchase(14)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade15" onclick="purchase(15)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade16" onclick="purchase(16)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade17" onclick="purchase(17)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade18" onclick="purchase(18)">Loading...</button></td>
 			</tr>
 		</table>
 		</div>
@@ -130,6 +130,7 @@
 				<!-- Options Menu -->
 		<div id="options" hidden="hidden">
 			<button type="button" onclick="closeWindow('options','1')" id="closeButton"></button>
+			<p class="shopText" style="font-size: 45px; margin: 16px;">Options</p>
 			<table>
 				<tr>
 					<td class="optionsTd"><button id="themeDisplay" type="button" class="smallButton optionsButton" onclick="changeTheme(1)">Theme: Default</button></td>
@@ -137,19 +138,56 @@
 					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="load()">Load</button></td>
 				</tr>
 				<tr>
-					<td></td>
-					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="resetAll()">RESET</button></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton"><span id="tickDisplay">Tickspeed (40)</span>
+						<div class="slidecontainer">
+							<input type="range" min="5" max="75" value="40" class="slider" id="tickSlider" oninput="updateSlider()">
+						</div>
+						</button>
+					</td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="popupWindow('confirmation', '2')">RESET</button></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="autoChange()"><span id="autoSaveDisplay">Autosave: ON (60s)</span>
+						<div class="slidecontainer">
+							<input type="range" min="10" max="120" value="60" class="slider" id="autoSlider" onclick="autoChange()" oninput="autoSave()">
+						</div>
+						</button>
+					</td>
 				</tr>
 			</table>
+		</div>
+				<!-- Confirmation Screen -->
+		<div id="confirmation" hidden="hidden">
+			<p class="shopText" style="font-size:40px;margin:10px;">Are you sure?</p>
+			<button type="button" class="smallButton confirmButton" onclick="resetAll()">Yes</button>
+			<button type="button" class="smallButton denyButton" onclick="closeWindow('confirmation', '2')">No</button>
 		</div>
 				<!-- Shortcuts Menu -->
 		<div id="shortcuts" hidden="hidden">
 			<button type="button" onclick="closeWindow('shortcuts','1')" id="closeButton"></button>
-			<table style="width:100%;">
+			<table class="shortcutsTable" style="width:100%;border:10px solid black;">
 				<tr>
-					<td class="shortcutsTd"><p class="shopText" style="text-align:left;font-size:50px;">Close Menu</p></td>
-					<td class="shortcutsTd"><p class="shopText" style="text-align:left;">Esc</p></td>
-				</td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Click the H</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">H</p></td>
+				</tr>
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Save Game</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">S</p></td>
+				</tr>
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Close Menu</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Esc/1</p></td>
+				</tr>
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Open H Business</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:25px;padding:0px;margin:0px;">2</p></td>
+				</tr>
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Open The Machine</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:25px;padding:0px;margin:0px;">3</p></td>
+				</tr>
+				<tr>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:30px;padding:0px;margin:0px;">Change themes</p></td>
+					<td class="shortcutsTd"><p class="shopText" style="font-size:25px;padding:0px;margin:0px;">Left arrow/Right arrow</p></td>
+				</tr>
 			</table>
 		</div>
 	</body>

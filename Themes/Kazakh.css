@@ -1,8 +1,8 @@
 :root {
-	--second-lightest: #f7c2c2;
-	--middle-colour: #ff7474;
-	--second-darkest: #c64242;
-	--darkest-colour: #541616;
+	--second-lightest: #fec50c;
+	--middle-colour: #00afca;
+	--second-darkest: #0080ca;
+	--darkest-colour: #ffd900;
 	--textcolour: #000000;
 }
 .top {

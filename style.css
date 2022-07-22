@@ -287,11 +287,73 @@ html {
 		font-size: 12px;
 	}
 } 
+.slidecontainer {
+  width: 100%;
+}
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 80%;
+  height: 15px;
+  border-radius: 8px;
+  background: var(--textcolour);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.slider:hover {
+  opacity: 1;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--second-lightest);
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: var(--second-lightest);
+  cursor: pointer;
+}
+/* Confirmation screen */
+.confirmButton {
+	border-radius: 0px;
+	font-size: 30px;
+	width: 100%;
+	height: 25%;
+	color: #000000;
+	background-color: #ff614f;
+	display: inline-block;
+}
+.denyButton {
+	border-radius: 0px;
+	font-size: 30px;
+	width: 100%;
+	height: 25%;
+	color: #000000;
+	background-color: #aeff6b;
+	display: inline-block;
+}
 /* Shortcuts Menu */
 .shortcutsTd {
 	table-layout: fixed;
 	width: 50%;
-	padding: 10px;
+	padding: 0px;
+	margin: 0px;
+	border: 5px solid black;
+}
+.shortcutsTable {
+	table-layout: fixed;
+	width: 0px;
+	height: 100%;
+	bottom: 0px;
+	position: absolute;
 }
 /* Popups */
 #greyOut1, #greyOut2 {
@@ -361,6 +423,17 @@ html {
 	z-index: 11;
 	background-color: var(--second-lightest);
 }
+#confirmation {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 35%;
+	height: 35%;
+	left: 32.5%;
+	top: 32.5%;
+	position: absolute;
+	z-index: 12;
+	background-color: var(--second-lightest);
+}
 #closeButton {
 	right: 0;
 	margin-right: 26%;
@@ -373,7 +446,6 @@ html {
 	position: fixed;
 	z-index: 14;
 }
-
 
 /* width */
 ::-webkit-scrollbar {

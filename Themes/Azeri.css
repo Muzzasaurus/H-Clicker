@@ -1,8 +1,9 @@
 :root {
-	--second-lightest: #f7c2c2;
-	--middle-colour: #ff7474;
-	--second-darkest: #c64242;
-	--darkest-colour: #541616;
+	--second-lightest: #ef3340; /* Middle stripe */
+	--middle-colour: #00b5e2; /* Top */
+	--bottom-colour: #509e2f; /* Bottom */
+	--second-darkest: #33661e; /* Hover */
+	--darkest-colour: #ffffff; /* Scrollbar and close button */
 	--textcolour: #000000;
 }
 .top {
@@ -12,9 +13,14 @@
 	background-color: var(--second-lightest);
 }
 .bottom {
-	background-color: var(--middle-colour);
+	background-color: var(--bottom-colour);
 }
-
+.bottomStripe {
+	background-color: var(--bottom-colour) !important;
+}
+.bottomStripe:hover {
+	background-color: var(--second-darkest) !important;
+}
 .tallButton {
 	background-color: var(--middle-colour);
 }
