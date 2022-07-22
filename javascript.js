@@ -63,7 +63,7 @@ function onStart() {
 	changeTheme(1);
 	idle();
 	savedH = Number(localStorage.getItem(`${numericalValues[0]}`));
-	if (savedH !== 0) {
+	if (savedH !== 0 && !== "NAN") {
 		load();
 	}
 	autoSaver();
