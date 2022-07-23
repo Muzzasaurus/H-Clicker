@@ -1,6 +1,6 @@
 /* Default Variables */
-const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 1000000000, 3000000000, (Math.random() * 1000000) + 10]
-const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, -5000000, 4000000, origprices[17] / (Math.random() * 1000) + 0.001]
+const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 3000000000, (Math.random() * 1000000) + 10]
+const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, 4000000, origprices[16] / (Math.random() * 1000) + 0.001]
 const origbusinessPrices = [10, 250, 750, 6500, 21000, 254254, 1000000, 4000000, 25000000, 40000000, 111111111, 254254254, 933748382, 6969696969, 50000000000, 175000000000]
 const origbusinessRewards = [0.1, 1, 3, 10, 70, 600, 1500, 3000, 9000, 15000, 51111, 84254, 187000, 500000, 3750000, 12500000]
 const origisPurchased = [0]
@@ -39,8 +39,8 @@ rewards = new Array(origrewards.length);
 upgrNum = new Array(rewards.length);
 const flavours = ["Pencil", "Pen", "Printer", "Typewriter", "Keyboard", "Broken Keyboard", "Intern",
 "H Secret Cult", "Employee", "Shady Business Partner", "H File Tactics", "Psychological Warfare",
-"https://docs.google.com/document/d/1roD6zfNKjTEF-W3KmHWMI22GVrTtueUFx__ikHeNCfs/edit?usp=drivesdk",
-"Genetically Modified H Men", "H Colonization", "Subservient Fish (blood for the blood god)", "Dragon Employee", "Random"]
+"Google drive link",
+"Genetically Modified H Men", "H Colonization", "Dragon Employee", "Random"]
 
 /* Business Arrays (H Per Click) */
 businessPrices = new Array(origbusinessPrices.length);
