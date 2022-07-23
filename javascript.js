@@ -86,6 +86,13 @@ function idle() {
 	document.getElementById("clickDisplay").innerHTML=addCommas(Math.round(trueClickPower*10)/10) + " H/c";
 	document.getElementById("resetButton").innerHTML="Reset for " + addCommas(potentialGlod) + " Glod H (Limit: " + addCommas(trueGlodLimit) +")";
 	document.getElementById("glodCountdown").innerHTML=addCommas(Math.round(hRemaining)) + " Hs left.";
+	if (autoSaveState == 0) {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
+		document.getElementById("autoSlider").style.display = "none";
+	} else {
+		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: ON (${saveTime}s)`
+		document.getElementById("autoSlider").style.display = "inline-block";
+	}
 	for (i = 0; i < prices.length; i++) {
 		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(upgrNum[i]) + ")<br>(+" + addCommas(Math.round((rewards[i]*glodBoost)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(prices[i]*1)/1) + " Hs";
 	}
@@ -328,9 +335,6 @@ function resetValues() {
 	trueClickPower=0;
 	requirement=1000000000;
 	hRemaining=requirement;
-	autoSaveState=0;
-	document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
-		document.getElementById("autoSlider").style.display = "none";
 	for (i=0; i<(prices.length); i++) {
 		prices[i]=origprices[i];
 	}
@@ -367,6 +371,7 @@ function resetAll() {
 	presToLimit=0;
 	requirement=1000000000;
 	hRemaining=1000000000;
+	autoSaveState=0;
 }
 /* Save and Load progress */
 const numericalValues = ["h", "clickPower", "startingHPC", "autoH", "theme", "potentialGlod", "glodIncome", "glodH", 
