@@ -1,5 +1,5 @@
 /* Default Variables */
-const origprices = [1, 100, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 3000000000, (Math.random() * 1000000) + 10]
+const origprices = [1, 50, 400, 900, 3500, 10000, 36000, 115000, 440000, 1000000, 2800000, 9100000, 22000000, 100000000, 700000000, 3000000000, (Math.random() * 1000000) + 10]
 const origrewards = [0.1, 1, 3, 12, 40, 120, 700, 1400, 3000, 5000, 12000, 45000, 100000, 250000, 1500000, 4000000, origprices[16] / (Math.random() * 1000) + 0.001]
 const origbusinessPrices = [10, 250, 750, 6500, 21000, 254254, 1000000, 4000000, 25000000, 40000000, 111111111, 254254254, 933748382, 6969696969, 50000000000, 175000000000]
 const origbusinessRewards = [0.1, 1, 3, 10, 70, 600, 1500, 3000, 9000, 15000, 51111, 84254, 187000, 500000, 3750000, 12500000]
@@ -51,7 +51,7 @@ const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Lead Poisoning
 "Funny H", "Novalis by GrilleX", "Hilarious H", "Time Machine H", "Dragon H"]
 
 /* Glod Shop Arrays */
-glodPrices = [10, 25, 50, 150, 300]
+glodPrices = [5, 15, 50, 150, 300]
 glodRewards = [0.1, 1, 10, 30, 1]
 isPurchased = new Array(origisPurchased.length);
 for (i=0; i<(isPurchased.length); i++) {

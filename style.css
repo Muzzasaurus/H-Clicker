@@ -114,6 +114,7 @@ html {
 	font-weight: bold;
 	color: black;
 	display: block;
+	touch-action: manipulation;
 }
 .tallButton:hover {
 	cursor: pointer;
@@ -137,6 +138,7 @@ html {
 	margin-left: auto;
 	margin-right: auto;
 	background-color:var(--middle-colour);
+	touch-action: manipulation;
 }
 .round {
 	border-radius: 15px;
@@ -259,6 +261,7 @@ html {
 	width: 250px;
 	height: 100px;
 	color:var(--textcolour);
+	touch-action: manipulation;
 }
 @media (min-width: 1530px) {
 	.optionsButton {
