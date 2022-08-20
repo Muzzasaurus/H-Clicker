@@ -77,7 +77,27 @@ html {
 #clickDisplay {
 	font-size: 40px;
 }
-
+.menuButton {
+	border-radius: 10px;
+	font-size: 20px;
+	width: 100px;
+	height: 40px;
+	color: var(--textcolour);
+}
+.menuTable, .menuTd {
+	padding: 0;
+    border-spacing: 0;
+}
+.menuTd {
+	width: 100px;
+	height: 0px;
+}
+.menuTable {
+	table-layout: fixed;
+	bottom: 0px;
+	right: 0px;
+	position: absolute;
+}
 /* H Shop */
 .hShop, .hShoptd {
 	border: 3px solid black;
@@ -114,7 +134,6 @@ html {
 	font-weight: bold;
 	color: black;
 	display: block;
-	touch-action: manipulation;
 }
 .tallButton:hover {
 	cursor: pointer;
@@ -131,14 +150,11 @@ html {
 	padding: 0;
 	text-align: center;
 	font-family: 'Alegreya Sans', sans-serif;
-	font-size: 27px;
 	font-weight: bold;
-	color: black;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	background-color:var(--middle-colour);
-	touch-action: manipulation;
 }
 .round {
 	border-radius: 15px;
@@ -226,7 +242,7 @@ html {
 	table-layout: fixed;
 	width: 0px;
 }
-#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4, #mouseOver5 {
+#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4, #mouseOver5, #mouseOver6, #mouseOver7, #mouseOver8, #mouseOver9 {
 	width: 500px;
 	height: 86px;
 	background-color: black;
@@ -240,6 +256,7 @@ html {
 	margin: 0px;
 	padding: 0px;
 	color: white;
+	z-index: 14;
 }
 .glodShopTd span {
 	display: none;
@@ -261,7 +278,6 @@ html {
 	width: 250px;
 	height: 100px;
 	color:var(--textcolour);
-	touch-action: manipulation;
 }
 @media (min-width: 1530px) {
 	.optionsButton {
@@ -437,6 +453,17 @@ html {
 	z-index: 12;
 	background-color: var(--second-lightest);
 }
+#offlinePopup {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 50%;
+	height: 75%;
+	left: 25%;
+	top: 12.5%;
+	position: absolute;
+	z-index: 11;
+	background-color: var(--second-lightest);
+}
 #closeButton {
 	right: 0;
 	margin-right: 26%;
@@ -474,4 +501,5 @@ html {
        -moz-user-select: none;
         -ms-user-select: none;
             user-select: none;
+	touch-action: manipulation;
 }
