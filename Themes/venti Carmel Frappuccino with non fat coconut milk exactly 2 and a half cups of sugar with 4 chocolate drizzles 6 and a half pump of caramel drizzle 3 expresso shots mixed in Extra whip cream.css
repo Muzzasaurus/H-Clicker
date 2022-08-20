@@ -1,0 +1,60 @@
+:root {
+	--second-lightest: #00704A; /* Middle stripe */
+	--middle-colour: #00704A; /* Top */
+	--bottom-colour: #00704A; /* Bottom */
+	--second-darkest: #006140; /* Hover */
+	--darkest-colour: #006140; /* Scrollbar and close button */
+	--textcolour: #FFFFFF;
+}
+.top {
+	background-color: var(--middle-colour);
+}
+.middle {
+	background-color: var(--second-lightest);
+}
+.bottom {
+	background-color: var(--bottom-colour);
+}
+.bottomStripe {
+	background-color: var(--bottom-colour) !important;
+}
+.bottomStripe:hover {
+	background-color: var(--second-darkest) !important;
+}
+.tallButton {
+	background-color: var(--middle-colour);
+}
+.tallButton:hover {
+	background-color: var(--second-darkest);
+}
+.tallButton:disabled:hover {
+	background-color: var(--middle-colour);
+}
+#hBusiness {
+	background-color: var(--second-lightest);
+
+}
+#hMachine {
+	background-color: var(--second-lightest);
+}
+#closeButton {
+	background-color: var(--darkest-colour);
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--darkest-colour);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--second-darkest);
+}
+.shopText {
+	color: var(--textcolour);
+}
+.tallButton {
+	color: var(--textcolour);
+}
+.mainDisplay {
+	color: var(--textcolour);
+}
