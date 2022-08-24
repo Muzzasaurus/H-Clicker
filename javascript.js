@@ -84,9 +84,6 @@ for (i=0; i<(game.isPurchased.length); i++) {
 for (i=0; i<(game.flavourHPS.length); i++) {
 	game.flavourHPS[i]=0;
 }
-for (i=0; i<(game.autoTimer.length); i++) {
-	game.autoTimer[i]=game.autoInterval[i];
-}
 for (i=0; i<(origautoPrices.length); i++) {
 	game.autoPrices[i]=origautoPrices[i];
 }
@@ -95,6 +92,9 @@ for (i=0; i<(game.autoUpgrNum.length); i++) {
 }
 for (i=0; i<(game.autoInterval.length); i++) {
 	game.autoInterval[i]=16000;
+}
+for (i=0; i<(game.autoTimer.length); i++) {
+	game.autoTimer[i]=game.autoInterval[i];
 }
 for (i=0; i<(game.bulkBuy.length); i++) {
 	game.bulkBuy[i]=1;
@@ -127,7 +127,7 @@ function onStart() {
 			h = Math.floor((offTime/3600) % 24);
 			d = Math.floor(offTime/86400);
 			document.getElementById("offlineTime").innerHTML = `You've been offline for ${d}:${addZero(h)}:${addZero(m)}:${addZero(s)}`;
-			document.getElementById("offlineGain").innerHTML = `At ${addCommas(game.trueAutoH)} HPS, you earned ${addCommas(Math.round(game.trueAutoH*offTime))} H`;
+			document.getElementById("offlineGain").innerHTML = `At ${addCommas(Math.round(game.trueAutoH))} HPS, you earned ${addCommas(Math.round(game.trueAutoH*offTime))} H`;
 		}
 		idle(((Date.now() - game.lastTime) / 1000) * game.tickSpeed);
 	} else {
@@ -566,6 +566,9 @@ function toggleOffline() {
 		document.getElementById("offlineOption").innerHTML="Offline progress: ON";
 	}
 }
+function log(base, num) {
+	return Math.log(num)/Math.log(base);
+}
 function addCommas(num) {
 	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -635,7 +638,24 @@ function load() {
 		}
 	}
 }
-
+function exportSave() {
+	let temp = btoa(JSON.stringify(localStorage.game));
+	navigator.clipboard.writeText(temp);
+	alert("Save copied to clipboard!");
+}
+function importSave() {
+	let temp = prompt("Paste save data");
+	if (temp === undefined || temp === null || temp == "") {
+	} else {
+		try {
+			localStorage.setItem("game", JSON.parse(atob(temp)));
+			load();
+		}
+		catch(err) {
+			alert("Invalid Save");
+		}
+	}
+}
 /* Offline Progress
 function timeNow() {
 	prevTime = Math.round(new Date().getTime() / 1000);
