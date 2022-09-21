@@ -1,10 +1,10 @@
 :root {
-	--second-lightest: #003DA5; /* Middle stripe */
-	--middle-colour: #FCE300; /* Top */
-	--bottom-colour: #EF3340; /* Bottom */
-	--second-darkest: #FFFFFF; /* Hover */
-	--darkest-colour: #FFFFFF; /* Scrollbar and close button */
-	--textcolour: #000000;
+	--second-lightest: #00704A; /* Middle stripe */
+	--middle-colour: #00704A; /* Top */
+	--bottom-colour: #00704A; /* Bottom */
+	--second-darkest: #006140; /* Hover */
+	--darkest-colour: #006140; /* Scrollbar and close button */
+	--textcolour: #FFFFFF;
 }
 .top {
 	background-color: var(--middle-colour);
@@ -43,14 +43,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--second-darkest);
 }
-/*
 .shopText {
-	color: #d1d1d1;
+	color: var(--textcolour);
 }
 .tallButton {
-	color: #d1d1d1;
+	color: var(--textcolour);
 }
 .mainDisplay {
-	color: #d1d1d1;
+	color: var(--textcolour);
 }
-*/

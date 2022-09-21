@@ -15,12 +15,6 @@
 .bottom {
 	background-color: var(--bottom-colour);
 }
-.bottomStripe {
-	background-color: var(--bottom-colour) !important;
-}
-.bottomStripe:hover {
-	background-color: var(--second-darkest) !important;
-}
 .tallButton {
 	background-color: var(--middle-colour);
 }

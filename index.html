@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html id="theHTML">
     <head>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Days+One&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
         <script src="javascript.js" defer></script>
         <link rel="stylesheet" href="style.css">
-		<link id="theme" rel="stylesheet" href="Themes/green.css">
+		<link id="theme" rel="stylesheet" href="Themes/Default.css">
+		<link id="font" rel="stylesheet" href="Fonts/default.css">
 		<meta name="description" content="A fun clicker game I've been working on to practice coding.">
 		<meta name="keywords" content="Clicker,Idle,Incremental,H">
 		<meta name="author" content="Muzza">
     </head>
     <body onload="onStart()">
-		<title>H Clicker v0.7</title>
+		<title>H Clicker v0.75</title>
+		<!-- Main Menu -->
+		<div id="menuOverlay">
+			<p id="menuText" class="shopText" style="color: #888888;">Welcome to H Clicker</p>
+			<p id="tutorialText" class="shopText" style="color: #888888;">Tutorial<br><small>Your only goal is to get as much H as possible. You may think to begin you click the H, but you actually begin with 0 H per click, meaning you need to buy the upgrade down the bottom left to actually start.</small></p>
+			<button onclick="startGame()" class="playButton">Play</button>
+			<button onclick="startTutorial()" class="tutorialButton">Tutorial</button>
+			<button onclick="backButton()" class="backButton">Back</button>
+		</div>
+		<!-- Main Game -->
 		<div class="split top">
 		<table class="mainBar">
 			<tr>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('shortcuts', '1')">Keyboard Shortcuts</button></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('options','1')">Options</button></td>
-				<td class="mainDisplay" id="currency"><p>0 Hs<br>0H/s</p></td>
+				<td class="mainDisplay" id="currency"><p>0 Hs<br><small>0H/s</small></p></td>
 				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hBusiness','1')">H Business</button></td>
-				<td class="mainBarTd"><button type="button" class="tallButton" onclick="popupWindow('hMachine','1')">The Machine</button></td>
+				<td class="mainBarTd"><button id="machineButton" type="button" class="tallButton" onclick="popupWindow('hMachine','1')">The Machine</button>
+				<button id="darkMachineButton" type="button" class="tallButton" style="height: 50%; display: none;"  onclick="popupWindow('darkMachine','1')">The Dark Machine</button></td>
 			</tr>
 		</table>
 		</div>
 		<div class="split middle">
-			<img id="hButton" src="Resources/h.png" onclick="increment()" style="touch-action: manipulation;"></button>
+			<img id="hButton" src="Resources/h.png" draggable="false" onclick="increment()" style="touch-action: manipulation;"></button>
 			<p id="clickDisplay" class="shopText">0 H/c</p>
 			<table id="menuTabs" class="menuTable" style="left:0px;" hidden="hidden">
 				<tr>
@@ -35,7 +47,7 @@
 			</table>
 			<table class="menuTable" style="right:0px;">
 				<tr>
-					<td class="menuTd"><button type="button" class="smallButton menuButton" onclick="buyMaxButton()">Buy Max</button></td>
+					<td class="menuTd"><button style="width:200px;" type="button" class="smallButton menuButton" onclick="buyMaxButton()">Buy Max</button></td>
 				</tr>
 			</table>
 		</div>
@@ -43,23 +55,23 @@
 		<table class="hShop">
 			<tr>
 				<!-- H Shop (H Per Second) -->
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade1" onclick="purchase(1, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade2" onclick="purchase(2, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade3" onclick="purchase(3, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade4" onclick="purchase(4, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade5" onclick="purchase(5, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade6" onclick="purchase(6, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade7" onclick="purchase(7, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade8" onclick="purchase(8, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade9" onclick="purchase(9, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade10" onclick="purchase(10, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade11" onclick="purchase(11, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade12" onclick="purchase(12, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade13" onclick="purchase(13, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade14" onclick="purchase(14, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade15" onclick="purchase(15, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade16" onclick="purchase(16, 1)">Loading...</button></td>
-				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hUpgrade17" onclick="purchase(17, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade1" onclick="purchase(1, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade2" onclick="purchase(2, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade3" onclick="purchase(3, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade4" onclick="purchase(4, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade5" onclick="purchase(5, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade6" onclick="purchase(6, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade7" onclick="purchase(7, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade8" onclick="purchase(8, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade9" onclick="purchase(9, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade10" onclick="purchase(10, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade11" onclick="purchase(11, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade12" onclick="purchase(12, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade13" onclick="purchase(13, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade14" onclick="purchase(14, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade15" onclick="purchase(15, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade16" onclick="purchase(16, 1)">Loading...</button></td>
+				<td class="hShopTd"><button type="button" class="tallButton bottomStripe gradOne" id="hUpgrade17" onclick="purchase(17, 1)">Loading...</button></td>
 			</tr>
 		</table>
 		</div>
@@ -67,6 +79,10 @@
 		<table class="hShop">
 			<tr>
 				<!-- Hautomation Shop (H Per Second) -->
+				<td class="hShopTd">
+					<button type="button" class="tallButton bottomStripe" style="height: 50%;" id="autoUpgrTog" onclick="toggleAuto()">Auto upgrades (ON)</button>
+					<button type="button" class="tallButton bottomStripe" style="height: 50%;" id="autoPresTog" onclick="toggleAutoPres()">Auto prestige (ON)</button>
+				</td>
 				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hAutoUpgrade1" onclick="purchaseAuto(1)">Loading...</button></td>
 				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hAutoUpgrade2" onclick="purchaseAuto(2)">Loading...</button></td>
 				<td class="hShopTd"><button type="button" class="tallButton bottomStripe" id="hAutoUpgrade3" onclick="purchaseAuto(3)">Loading...</button></td>
@@ -94,26 +110,32 @@
 		</div>
 		<div id="hBusiness" hidden="hidden">
 		<button type="button" onclick="closeWindow('hBusiness','1')" id="closeButton"></button>
+		<div id="businessHeader">
+			<p class="shopText headerText">Say hello to the business world, kid.</p>
+			<p class="shopText bodyText" style="margin:0px;font-weight:normal;">Here you can buy new flavours of H, which will attract more customers.</p>
+			<p class="shopText" style="margin:4px;font-size:30px;" id="businessHDisplay">You have 0 Hs</p>
+			<p class="shopText" style="margin:4px;" id="businessHPCDisplay">0 H/c</p>
+		</div>
 		<table class="hBusinessTable">
 			<tr>
 				<!-- H Business (H Per Click)-->
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness1" onclick="purchaseBusiness(1)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness2" onclick="purchaseBusiness(2)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness3" onclick="purchaseBusiness(3)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness4" onclick="purchaseBusiness(4)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness5" onclick="purchaseBusiness(5)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness6" onclick="purchaseBusiness(6)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness7" onclick="purchaseBusiness(7)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness8" onclick="purchaseBusiness(8)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness9" onclick="purchaseBusiness(9)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness10" onclick="purchaseBusiness(10)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness11" onclick="purchaseBusiness(11)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness12" onclick="purchaseBusiness(12)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness13" onclick="purchaseBusiness(13)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness14" onclick="purchaseBusiness(14)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness15" onclick="purchaseBusiness(15)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness16" onclick="purchaseBusiness(16)">Loading...</button></td>
-				<td class="hBusinessTd"><button type="button" class="tallButton" id="hBusiness17" onclick="purchaseBusiness(17)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness1" onclick="purchaseBusiness(1)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness2" onclick="purchaseBusiness(2)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness3" onclick="purchaseBusiness(3)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness4" onclick="purchaseBusiness(4)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness5" onclick="purchaseBusiness(5)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness6" onclick="purchaseBusiness(6)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness7" onclick="purchaseBusiness(7)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness8" onclick="purchaseBusiness(8)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness9" onclick="purchaseBusiness(9)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness10" onclick="purchaseBusiness(10)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness11" onclick="purchaseBusiness(11)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness12" onclick="purchaseBusiness(12)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness13" onclick="purchaseBusiness(13)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness14" onclick="purchaseBusiness(14)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness15" onclick="purchaseBusiness(15)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness16" onclick="purchaseBusiness(16)">Loading...</button></td>
+				<td class="hBusinessTd"><button type="button" class="tallButton gradTwo" id="hBusiness17" onclick="purchaseBusiness(17)">Loading...</button></td>
 			</tr>
 		</table>
 		</div>
@@ -135,17 +157,21 @@
 			<p id="glodHNuggetDisplay2" class="shopText" style="font-size: 25px; margin: 0px;">0 Glod H Nuggets</p>
 			<table>
 				<tr>
-					<td class="glodShopTd"><span id="mouseOver1"><p>+10% Overall H boost per Glod H</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'power')">5 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver2"><p>Gain +1 H/c at the start of the game</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'startingHPC')">15 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver3"><p>Increase glod limit by 10</p></span><button id="glodUpgrade3" type="button" class="smallButton round2" onclick="purchaseGlod(3, 'limit')">50 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver4"><p>Increase glod limit by 30</p></span><button id="glodUpgrade4" type="button" class="smallButton round2" onclick="purchaseGlod(4, 'limit')">100 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver5"><p id="prestigeCount">Increase glod limit by number of presiges (0 prestiges)</p></span><button id="glodUpgrade5" type="button" class="smallButton round2" onclick="purchaseGlod(5, 'conditionalLimit')">250 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver6"><p>+5% Overall H boost per Glod H</p></span><button id="glodUpgrade6" type="button" class="smallButton round2" onclick="purchaseGlod(6, 'power')">300 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver7"><p>Unlock Automation</p></span><button id="glodUpgrade7" type="button" class="smallButton round2" onclick="purchaseGlod(7, 'unlock')">500 Glod Nuggets</button></td>
-					<td class="glodShopTd"><span id="mouseOver8"><p>Unspent Glod H Nuggets boost Glod H boost</p></span><button id="glodUpgrade8" type="button" class="smallButton round2" onclick="purchaseGlod(8, 'unlock')">1,000 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>+10% Overall H boost per Glod H</p></span><button id="glodUpgrade1" type="button" class="smallButton round2" onclick="purchaseGlod(1, 'power')">5 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Gain +1 H/c at the start of the game</p></span><button id="glodUpgrade2" type="button" class="smallButton round2" onclick="purchaseGlod(2, 'startingHPC')">15 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Increase glod limit by 10</p></span><button id="glodUpgrade3" type="button" class="smallButton round2" onclick="purchaseGlod(3, 'limit')">50 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Increase glod limit by 30</p></span><button id="glodUpgrade4" type="button" class="smallButton round2" onclick="purchaseGlod(4, 'limit')">100 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p id="prestigeCount">Increase glod limit by number of presiges (0 prestiges)</p></span><button id="glodUpgrade5" type="button" class="smallButton round2" onclick="purchaseGlod(5, 'conditionalLimit')">250 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>+5% Overall H boost per Glod H</p></span><button id="glodUpgrade6" type="button" class="smallButton round2" onclick="purchaseGlod(6, 'power')">300 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Unspent Glod H Nuggets boost Glod H boost</p></span><button id="glodUpgrade7" type="button" class="smallButton round2" onclick="purchaseGlod(7, 'unlock')">1,000 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Increase glod limit by number of prestiges*9</p></span><button id="glodUpgrade8" type="button" class="smallButton round2" onclick="purchaseGlod(8, 'conditionalLimit')">2,000 Glod Nuggets</button></td>
 				</tr>
 				<tr>
-					<td class="glodShopTd"><span id="mouseOver9"><p>Increase glod limit by number of prestiges*9</p></span><button id="glodUpgrade9" type="button" class="smallButton round2" onclick="purchaseGlod(9, 'conditionalLimit')">2,000 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Unlock Automation</p></span><button id="glodUpgrade9" type="button" class="smallButton round2" onclick="purchaseGlod(9, 'unlock')">5,000 Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>+85% Overall H boost per Glod H</p></span><button id="glodUpgrade10" type="button" class="smallButton round2" onclick="purchaseGlod(10, 'power')">10M Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Gain 1% of potential glod h per second without resetting! (Tip: turn auto prestige off before going afk)</p></span><button id="glodUpgrade11" type="button" class="smallButton round2" onclick="purchaseGlod(11, 'glodGain')">50M Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p>Unlock the Dark H Machine (coming next update)</p></span><button id="glodUpgrade12" type="button" class="smallButton round2" onclick="purchaseGlod(12, 'unlock')">100M Glod Nuggets</button></td>
+					<td class="glodShopTd"><span class="mouseOver"><p id="hGainCount">Boost Idle Glod Gain by H</p></span><button id="glodUpgrade13" type="button" class="smallButton round2" onclick="purchaseGlod(13, 'unlock')">200M Glod Nuggets</button></td>
 				</tr>
 			</table>
 		</div>
@@ -176,8 +202,18 @@
 				</tr>
 				<tr>
 					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="importSave()">Import</button></td>
-					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="popupWindow('confirmation', '2')">RESET</button></td>
+					<td class="optionsTd"><button id="fontDisplay" type="button" class="smallButton optionsButton" onclick="changeFont()">Font: Default</button></td>
 					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="exportSave()">Export</button></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td class="optionsTd"><button type="button" class="smallButton optionsButton" onclick="popupWindow('confirmation', '2')">RESET</button></td>
+				</tr>
+				<tr><td><br><br></td></tr>
+				<tr>
+					<td class="optionsTd"><a href="https://discord.gg/j9wPJ3Q2pF" style="text-decoration: none;" target="_blank"><button class="smallButton optionsButton">Discord</button></a></td>
+					<td class="optionsTd"><button class="smallButton optionsButton" onclick="popupWindow('statistics', '2')">Stats</button></td>
+					<td class="optionsTd"><a href="https://www.paypal.com/donate/?hosted_button_id=HJVUZ54AHE9G4" style="text-decoration: none;" target="_blank"><button class="smallButton optionsButton">Donate</button></a></td>
 				</tr>
 			</table>
 		</div>
@@ -222,12 +258,31 @@
 				
 			</table>
 		</div>
+				<!-- Statistics -->
+		<div id="statistics" hidden>
+			<button type="button" onclick="closeWindow('statistics','2')" id="closeButton" style="margin-right: 38.5%;"></button>
+			<p class="shopText" style="font-size: 45px; margin: 16px;">Statistics</p>
+			<dl class="shopText" style="font-weight: normal;">
+				<dt id="clickTracker">Total H clicks: 0</dt>
+				<dt id="timeTracker">You've played for: 00:00:00:00</dt>
+				<dt id="prestigeTimeTracker">Time since last prestige: 00:00:00:00</dt>
+				<dt id="fastestPrestigeTracker">Fastest prestige: 00:00:00:00</dt>
+				<dt id="prestigeTracker">Glod H Prestiges: 0</dt>
+			</dl>
+		</div>
+		<div id="darkMachine" hidden>
+			<div id="darkContent">
+				<div id="easySolution"><button type="button" onclick="closeWindow('darkMachine','1')" id="closeButton" style="margin-right:35px;"></button></div>
+				<p class="shopText" style="font-size: 45px; margin: 16px;">Dark Machine</p>
+			</div>
+		</div>
 				<!-- Offline Progress Popup -->
 		<div id="offlinePopup" hidden="hidden">
 			<button type="button" onclick="closeWindow('offlinePopup','1')" id="closeButton"></button>
 			<br>
 			<p id="offlineTime" class="shopText" style="font-size: 40px;">You've been offline for 00:00:00</p>
 			<p id="offlineGain" class="shopText" style="font-size: 35px;">At 0 HPS, you earned 0 H</p>
+			<p id="offlineGlodGain" class="shopText" style="font-size: 35px;">You earned +0 Glod H</p>
 		</div>
 	</body>
 </html>

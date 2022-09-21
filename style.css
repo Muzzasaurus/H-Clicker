@@ -1,5 +1,7 @@
 html {
 	cursor: url('Resources/h_cursor.png'), auto;
+	overflow: hidden;
+	scroll-behavior: smooth;
 }
 /* Div classes */
 .split {
@@ -44,9 +46,9 @@ html {
 .mainDisplay {
 	width: 40%;
 	text-align: center;
-	font-family: 'Alegreya Sans', sans-serif;
+	font-family: var(--main-font);
 	font-size: 40px;
-	font-weight: bold;
+	font-weight: var(--main-weight);
 	color: black;
 	margin: 0px;
 	padding: 0px;
@@ -79,9 +81,9 @@ html {
 }
 .menuButton {
 	border-radius: 10px;
-	font-size: 20px;
-	width: 100px;
-	height: 40px;
+	font-size: 40px;
+	width: auto;
+	height: 80px;
 	color: var(--textcolour);
 }
 .menuTable, .menuTd {
@@ -99,6 +101,24 @@ html {
 	position: absolute;
 }
 /* H Shop */
+button.bottomStripe {
+	background-color: var(--bottom-colour);
+	background-image: linear-gradient(to right, var(--second-lightest), var(--darkest-colour));
+	background-repeat: no-repeat;
+	background-size: 0% 100%;
+}
+button.bottomStripe:disabled:hover {
+	background-color: var(--bottom-colour);
+}
+button.gradTwo {
+	background-color: var(--bottom-colour);
+	background-image: linear-gradient(to right, var(--second-lightest), var(--darkest-colour));
+	background-repeat: no-repeat;
+	background-size: 0% 100%;
+}
+button.gradTwo:disabled:hover {
+	background-color: var(--bottom-colour);
+}
 .hShop, .hShoptd {
 	border: 3px solid black;
 	width: 100%;
@@ -116,11 +136,71 @@ html {
 }
 .shopText {
 	text-align: center;
-	font-family: 'Alegreya Sans', sans-serif;
+	font-family: var(--main-font);
 	font-size: 27px;
-	font-weight: bold;
+	font-weight: var(--main-weight);
 	color: black;
 	display: block;
+}
+@media (min-width: 1550px) {
+	.headerText {
+		font-size: 45px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 25px;
+	}
+}
+@media (max-width: 1550px) {
+	.headerText {
+		font-size: 40px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 20px;
+	}
+}
+@media (max-width: 1400px) {
+	.headerText {
+		font-size: 35px;
+		margin: 16px;
+	}
+}
+@media (max-width: 1250px) {
+	.headerText {
+		font-size: 30px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 15px;
+	}
+}
+@media (max-width: 1111px) {
+	.headerText {
+		font-size: 25px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 12px;
+	}
+}
+@media (max-width: 950px) {
+	.headerText {
+		font-size: 20px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 10px;
+	}
+}
+@media (max-width: 800px) {
+	.headerText {
+		font-size: 15px;
+		margin: 16px;
+	}
+	.bodyText {
+		font-size: 8px;
+	}
 }
 .tallButton {
 	width: 100%;
@@ -129,9 +209,9 @@ html {
 	border-spacing: 0;
 	padding: 0;
 	text-align: center;
-	font-family: 'Alegreya Sans', sans-serif;
+	font-family: var(--main-font);
 	font-size: 27px;
-	font-weight: bold;
+	font-weight: var(--main-weight);
 	color: black;
 	display: block;
 }
@@ -149,8 +229,8 @@ html {
 	border-spacing: 0;
 	padding: 0;
 	text-align: center;
-	font-family: 'Alegreya Sans', sans-serif;
-	font-weight: bold;
+	font-family: var(--main-font);
+	font-weight: var(--main-weight);
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -222,9 +302,38 @@ html {
 .hBusinessTable {
 	table-layout: fixed;
 	width: 0px;
-	height: 100%;
 	bottom: 0px;
 	position: absolute;
+}
+@media (min-height: 945px) {
+	.hBusinessTable {
+		height: 70%;
+	}
+}
+@media (max-height: 945px) {
+	.hBusinessTable {
+		height: 65%;
+	}
+}
+@media (max-height: 840px) {
+	.hBusinessTable {
+		height: 60%;
+	}
+}
+@media (max-height: 720px) {
+	.hBusinessTable {
+		height: 55%;
+	}
+}
+@media (max-height: 650px) {
+	.hBusinessTable {
+		height: 50%;
+	}
+}
+#businessHeader {
+	position: fixed;
+	width: 50%;
+	left: 25%;
 }
 /* Glod Shop */
 .glodShop, .glodShoptd {
@@ -242,7 +351,7 @@ html {
 	table-layout: fixed;
 	width: 0px;
 }
-#mouseOver1, #mouseOver2, #mouseOver3, #mouseOver4, #mouseOver5, #mouseOver6, #mouseOver7, #mouseOver8, #mouseOver9 {
+.mouseOver {
 	width: 500px;
 	height: 86px;
 	background-color: black;
@@ -250,17 +359,18 @@ html {
 	top: 0px;
 	left: 0px;
 	text-align: center;
-	font-family: 'Alegreya Sans', sans-serif;
+	font-family: var(--main-font);
 	font-size: 20px;
 	font-weight: normal;
 	margin: 0px;
 	padding: 0px;
 	color: white;
 	z-index: 14;
+	transition: all 0s;
 }
 .glodShopTd span {
 	display: none;
-	z-index: 13;
+	z-index: 14;
 }
 .glodShopTd:hover span {
 	display: block;
@@ -371,7 +481,7 @@ html {
 	table-layout: fixed;
 	width: 0px;
 	height: 100%;
-	bottom: 0px;
+	top: 0px;
 	position: absolute;
 }
 /* Popups */
@@ -388,13 +498,102 @@ html {
 #greyOut2 {
 	z-index: 12;
 }
+#menuOverlay {
+	background: #FF0000;
+	background-image: conic-gradient(from 0deg at top left, #ff0000, #ff00b0);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 200%;
+	height: 100%;
+	position: absolute;
+	z-index: 15;
+	left: 0px;
+	top: 0px;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-direction: forwards;
+}
+#menuText {
+	position: absolute;
+	transform: translate(-50%);
+	left: 25%;
+	font-size: 70px;
+	font-size: 5vw;
+	mix-blend-mode: darken;
+}
+#tutorialText {
+	position: absolute;
+	transform: translate(-50%);
+	left: 75%;
+	font-size: 60px;
+	font-size: 3.5vw;
+	mix-blend-mode: darken;
+}
+
+.playButton, .tutorialButton, .backButton {
+	border-radius: 10px;
+	font-size: 70px;
+	font-size: 7vw;
+	width: 12.5%;
+	height: 25%;
+	color: white;
+	cursor: pointer;
+	background-color: black;
+	position: absolute;
+	border: 0px solid black;
+	background-repeat: no-repeat;
+	background-size: cover;
+	mix-blend-mode: darken;
+	filter: invert(0%) drop-shadow(8px 8px 7.5px black);
+}
+.playButton {
+	left: 10%;
+	bottom: 30%;
+}
+.tutorialButton {
+	right: 60%;
+	bottom: 30%;
+}
+.backButton {
+	right: 13%;
+	bottom: 10%;
+	transform: translate(-50%);
+}
+.playButton:hover, .tutorialButton:hover, .backButton:hover {
+	width: 10%;
+	height: 20%;
+	font-size: 50px;
+	font-size: 5.75vw;
+	filter: invert(100%) drop-shadow(2px 2px 7.5px black);
+}
+.playButton:hover {
+	left: 11.25%;
+	bottom: 32.5%;
+}
+.tutorialButton:hover {
+	right: 61.25%;
+	bottom: 32.5%;
+}
+.backButton:hover {
+	right: 15.5%;
+	bottom: 12.5%;
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
 #hBusiness {
 	border: 5px solid black;
 	border-radius: 15px;
 	width: 50%;
-	height: 50%;
+	height: 70%;
 	left: 25%;
-	top: 25%;
+	top: 15%;
 	position: absolute;
 	z-index: 11;
 	overflow-x: scroll;
@@ -408,6 +607,7 @@ html {
 	top: 12.5%;
 	position: absolute;
 	z-index: 11;
+	overflow: auto;
 }
 #glodShop {
 	border: 5px solid black;
@@ -419,6 +619,7 @@ html {
 	position: absolute;
 	z-index: 13;
 	background-color: var(--second-lightest);
+	overflow: auto;
 }
 #options {
 	border: 5px solid black;
@@ -430,6 +631,8 @@ html {
 	position: absolute;
 	z-index: 11;
 	background-color: var(--second-lightest);
+	overflow: auto;
+	overflow-x: hidden;
 }
 #shortcuts {
 	border: 5px solid black;
@@ -441,6 +644,7 @@ html {
 	position: absolute;
 	z-index: 11;
 	background-color: var(--second-lightest);
+	overflow: auto;
 }
 #confirmation {
 	border: 5px solid black;
@@ -452,6 +656,70 @@ html {
 	position: absolute;
 	z-index: 12;
 	background-color: var(--second-lightest);
+}
+#darkMachine {
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	z-index: 14;
+	overflow: auto;
+	animation-duration: 1.5s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	animation-timing-function: cubic-bezier(0.65, 0, 0.45, 1);
+	background-color: var(--second-lightest);
+	animation-direction: alternate;
+}
+#darkMachine > * {
+	display: none;
+	animation-duration: 1.5s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+@keyframes openPopup {
+	0% {
+		width: 0px;
+		height: 0px;
+		left: 50%;
+		top: 50%;
+		border-radius: 150px;
+		overflow: hidden;
+		background-color: var(--second-lightest);
+	}
+	100% {
+		width: 100%;
+		height: 100%;
+		left: 0px;
+		top: 0px;
+		border-radius: 0px;
+		background-color: #151515;
+	}
+}
+@keyframes pulse {
+	0% {
+		background-color: #151515;
+	}
+	100% {
+		background-color: #202020;
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
 }
 #offlinePopup {
 	border: 5px solid black;
@@ -475,6 +743,19 @@ html {
 	height: 50px;
 	position: fixed;
 	z-index: 14;
+}
+#statistics {
+	border: 5px solid black;
+	border-radius: 15px;
+	width: 25%;
+	height: 60%;
+	left: 37.5%;
+	top: 20%;
+	position: absolute;
+	z-index: 12;
+	background-color: var(--second-lightest);
+	overflow: auto;
+	overflow-x: hidden;
 }
 
 /* width */
@@ -502,4 +783,5 @@ html {
         -ms-user-select: none;
             user-select: none;
 	touch-action: manipulation;
+	transition: all, 0.4s;
 }
