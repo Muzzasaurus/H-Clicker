@@ -5,6 +5,7 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Days+One&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700" rel="stylesheet">
         <script src="javascript.js" defer></script>
         <link rel="stylesheet" href="style.css">
 		<link id="theme" rel="stylesheet" href="Themes/Default.css">
@@ -14,7 +15,7 @@
 		<meta name="author" content="Muzza">
     </head>
     <body onload="onStart()">
-		<title>H Clicker v0.75</title>
+		<title>H Clicker v0.8</title>
 		<!-- Main Menu -->
 		<div id="menuOverlay">
 			<p id="menuText" class="shopText" style="color: #888888;">Welcome to H Clicker</p>
@@ -211,7 +212,7 @@
 				</tr>
 				<tr><td><br><br></td></tr>
 				<tr>
-					<td class="optionsTd"><a href="https://discord.gg/j9wPJ3Q2pF" style="text-decoration: none;" target="_blank"><button class="smallButton optionsButton">Discord</button></a></td>
+					<td></td>
 					<td class="optionsTd"><button class="smallButton optionsButton" onclick="popupWindow('statistics', '2')">Stats</button></td>
 				</tr>
 			</table>
@@ -269,10 +270,13 @@
 				<dt id="prestigeTracker">Glod H Prestiges: 0</dt>
 			</dl>
 		</div>
+				<!-- Dark Machine -->
 		<div id="darkMachine" hidden>
 			<div id="darkContent">
 				<div id="easySolution"><button type="button" onclick="closeWindow('darkMachine','1')" id="closeButton" style="margin-right:35px;"></button></div>
-				<p class="shopText" style="font-size: 45px; margin: 16px;">Dark Machine</p>
+				<p class="shopText" style="font-size: 3em; margin: 16px;">Dark Machine</p>
+				<p class="shopText" style="font-size: 2.25em; font-weight: normal;">Turning on the dark machine will remove all Glod H limits, but at a cost of production.</p>
+				<button id="machinePowerButton" type="button" onclick="activateDarkMachine()" class="smallButton optionsButton">Turn on the machine</button>
 			</div>
 		</div>
 				<!-- Offline Progress Popup -->
