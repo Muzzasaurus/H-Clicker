@@ -11,8 +11,8 @@ const themes = ["Default", "Dark", "Reddish", "Blue", "Pastel", "Purple",
 "Somebody Scream", "Hatsune Miku Colour Palette", "Hard Mode", "Eye Bleeding Mode",
 "Kazakh", "Azeri", "Brazil", "Venezuela", "Boshy", 
 "venti Carmel Frappuccino with non fat coconut milk exactly 2 and a half cups of sugar with 4 chocolate drizzles 6 and a half pump of caramel drizzle 3 expresso shots mixed in Extra whip",
-"Trans"];
-const fonts = ["Default", "Mono", "Days One", "Kamilia 3"];
+"Enby", "Trans"];
+const fonts = ["Default", "Mono", "Days One", "Kamilia 3", "Fira Code"];
 const flavours = ["Pencil", "Pen", "Printer", "Typewriter", "Keyboard", "Broken Keyboard", "Intern",
 "H Secret Cult", "Employee", "Shady Business Partner", "H File Tactics", "Psychological Warfare",
 "Google drive link",
@@ -23,7 +23,7 @@ const businessNames = ["Chocolate H", "Strawberry H", "Crime H", "Rilee H", "Lea
 
 const game = {
 	/* 		  Declaring Variables 		 */
-	versionNumber: 0.75,
+	versionNumber: 0.8,
 	h: 1,
 	newH: 0,
 	clickPower: 0,
@@ -65,6 +65,8 @@ const game = {
 	darkUnlocked: 0,
 	hBoostUnlocked: 0,
 	hGainBoost: 1,
+	limitless: false,
+	limitlessRoot: 1.7,
 
 	/* Flavour Arrays (H Per Second) */
 	flavourHPS: new Array(origrewards.length),
@@ -216,7 +218,11 @@ function idle(diff) {
 	if (game.menuSelected == 0) {
 		document.getElementById("currency").innerHTML=addCommas(Math.round(game.h)) + " Hs<br><small>" + addCommas(Math.round(game.trueAutoH*10)/10) + "H/s</small>";
 	} else if (game.menuSelected == 1) {
-		document.getElementById("currency").innerHTML=addCommas(Math.round(game.glodHNugget)) + " Glod H Nuggets<br><small>" + addCommas(Math.round(game.potentialGlod)) + "/" + addCommas(Math.round(game.trueGlodLimit)) + " Potential Glod H</small>";
+		if (!game.limitless) {
+			document.getElementById("currency").innerHTML=addCommas(Math.round(game.glodHNugget)) + " Glod H Nuggets<br><small>" + addCommas(Math.round(game.potentialGlod)) + "/" + addCommas(Math.round(game.trueGlodLimit)) + " Potential Glod H</small>";
+		} else {
+			document.getElementById("currency").innerHTML=addCommas(Math.round(game.glodHNugget)) + " Glod H Nuggets, " + addCommas(Math.round(game.glodGain*game.potentialGlod*game.hGainBoost)) +"/s <br><small>" + addCommas(Math.round(game.potentialGlod)) + " Potential Glod H, " + addCommas(Math.round(Math.pow(game.glodGain*game.potentialGlod*game.hGainBoost,1/game.limitlessRoot))) + "/s</small>";
+		}
 	}
 	document.getElementById("businessHDisplay").innerHTML="You have " + addCommas(Math.round(game.h)) + " Hs";
 	document.getElementById("businessHPCDisplay").innerHTML=addCommas(Math.round(game.trueClickPower*10)/10) + " H/c";
@@ -232,9 +238,17 @@ function idle(diff) {
 	}
 	document.getElementById("glodHNuggetDisplay2").innerHTML=addCommas(Math.round(game.glodHNugget)) + " Glod H Nuggets";
 	document.getElementById("prestigeCount").innerHTML="Increase glod limit by number of presiges (" + addCommas(Math.round(game.prestiges)) + " prestiges)";
-	document.getElementById("hGainCount").innerHTML="Boost Idle Glod Gain by H<br>Currently: " + addCommas(Math.round(game.hGainBoost*100)/100) + "x (" + addCommas(Math.round(game.glodGain*game.potentialGlod*game.hGainBoost)) + " Glod HPS)";
+	if (game.limitless) {
+		document.getElementById("hGainCount").innerHTML="Boost Idle Glod Gain by H<br>Currently: " + addCommas(Math.round(game.hGainBoost*100)/100) + "x (" + addCommas(Math.round(Math.pow(game.glodGain*game.potentialGlod*game.hGainBoost,1/game.limitlessRoot))) + " Glod HPS)";
+	} else {
+		document.getElementById("hGainCount").innerHTML="Boost Idle Glod Gain by H<br>Currently: " + addCommas(Math.round(game.hGainBoost*100)/100) + "x (" + addCommas(Math.round(game.glodGain*game.potentialGlod*game.hGainBoost)) + " Glod HPS)";
+	}
 	document.getElementById("clickDisplay").innerHTML=addCommas(Math.round(game.trueClickPower*10)/10) + " H/c";
-	document.getElementById("resetButton").innerHTML="Reset for " + addCommas(game.potentialGlod) + " Glod H (Limit: " + addCommas(game.trueGlodLimit) +")";
+	if (game.limitless) {
+		document.getElementById("resetButton").innerHTML="Reset for " + addCommas(game.potentialGlod) + " Glod H";
+	} else {
+		document.getElementById("resetButton").innerHTML="Reset for " + addCommas(game.potentialGlod) + " Glod H (Limit: " + addCommas(game.trueGlodLimit) +")";
+	}
 	document.getElementById("glodCountdown").innerHTML=addCommas(Math.round(game.hRemaining)) + " Hs left.";
 	if (game.autoSaveState == 0) {
 		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: OFF`;
@@ -243,8 +257,14 @@ function idle(diff) {
 		document.getElementById("autoSaveDisplay").innerHTML = `Autosave: ON (${game.saveTime}s)`
 		document.getElementById("autoSlider").style.display = "inline-block";
 	}
-	for (i = 0; i < origprices.length; i++) {
-		document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(game.upgrNum[i]) + ")<br>(+" + addCommas(Math.round((game.rewards[i]*game.glodBoost)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(origprices[i]*Math.pow(game.priceMulti, game.upgrNum[i]))) + " Hs";
+	if (game.limitless) {
+		for (i = 0; i < origprices.length; i++) {
+			document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(game.upgrNum[i]) + ")<br>(+" + addCommas(Math.round((Math.pow(Math.pow(game.trueAutoH,game.limitlessRoot)+game.rewards[i]*game.glodBoost,1/game.limitlessRoot)-game.trueAutoH)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(origprices[i]*Math.pow(game.priceMulti, game.upgrNum[i]))) + " Hs";
+		}
+	} else {
+		for (i = 0; i < origprices.length; i++) {
+			document.getElementById(`hUpgrade${i+1}`).innerHTML=flavours[i] + " (" + addCommas(game.upgrNum[i]) + ")<br>(+" + addCommas(Math.round((game.rewards[i]*game.glodBoost)*10)/10) + " H/s)<br><br>" + addCommas(Math.round(origprices[i]*Math.pow(game.priceMulti, game.upgrNum[i]))) + " Hs";
+		}
 	}
 	for (i = 0; i < origprices.length; i++) {
 		if (game.autoUpgrNum[i] == 9) {
@@ -265,8 +285,14 @@ function idle(diff) {
 	} else {
 		document.getElementById(`hAutoUpgrade18`).innerHTML="Prestige Auto <br>(" + Math.round(game.autoInterval[17]*10)/10 + " ms)<br><br>(MAX)";
 	}
-	for (i = 0; i < game.businessPrices.length; i++) {
-		document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(game.businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((game.businessRewards[i]*game.glodBoost)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(game.businessPrices[i])) + " Hs";
+	if (game.limitless) {
+		for (i = 0; i < game.businessPrices.length; i++) {
+			document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(game.businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((Math.pow(Math.pow(game.trueClickPower,game.limitlessRoot)+game.businessRewards[i]*game.glodBoost,1/game.limitlessRoot)-game.trueClickPower)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(game.businessPrices[i])) + " Hs";
+		}
+	} else {
+		for (i = 0; i < game.businessPrices.length; i++) {
+			document.getElementById(`hBusiness${i+1}`).innerHTML=businessNames[i] + " (" + addCommas(game.businessUpgrNum[i]) + ")<br>(+" + addCommas(Math.round((game.businessRewards[i]*game.glodBoost)*10)/10) + " H/c)<br><br><br><br>" + addCommas(Math.round(game.businessPrices[i])) + " Hs";
+		}
 	}
 	game.h+=(game.trueAutoH/game.tickSpeed)*diff;
 	game.newH+=(game.trueAutoH/game.tickSpeed)*diff;
@@ -274,14 +300,22 @@ function idle(diff) {
 	game.glodHNugget+=((game.glodGain*game.potentialGlod*game.hGainBoost)/game.tickSpeed)*diff;
 	game.lastTime=Date.now();
 	game.glodBoost=(game.glodH*game.glodPower*game.unspentBoost)+1;
-	game.trueAutoH=game.autoH*game.glodBoost;
+	if (game.limitless) {
+		game.trueAutoH=Math.pow(game.autoH*game.glodBoost,1/game.limitlessRoot);
+	} else {
+		game.trueAutoH=game.autoH*game.glodBoost;
+	}
 	if (document.getElementById("statistics").style.display == "block") {
 		updateStats();
 	}
 	calculateLimit();
 	unspentCalc();
 	gainBoostCalc();
-	game.trueClickPower=game.clickPower*game.glodBoost;
+	if (game.limitless) {
+		game.trueClickPower=Math.pow(game.clickPower*game.glodBoost,1/game.limitlessRoot);
+	} else {
+		game.trueClickPower=game.clickPower*game.glodBoost;
+	}
 	canAfford();
 	potentialCheck();
 	checkIfNegative();
@@ -475,7 +509,7 @@ function switchToUpgrade() {
 }
 /*		Glod H		*/
 function potentialCheck() {
-	if (game.potentialGlod < game.trueGlodLimit) {
+	if ((game.potentialGlod < game.trueGlodLimit) || (game.limitless)) {
 		if (game.newH >= game.requirement) {
 			game.potentialGlod+=(game.glodIncome*(Math.floor(game.newH/game.requirement)));
 			game.requirement+=(Math.floor(game.newH/game.requirement))*10;
@@ -486,7 +520,7 @@ function potentialCheck() {
 		game.hRemaining=game.requirement;
 		game.newH=0;
 	}
-	if (game.potentialGlod > game.trueGlodLimit) {
+	if ((game.potentialGlod > game.trueGlodLimit) && (!game.limitless)) {
 		game.potentialGlod = game.trueGlodLimit;
 	}
 	if (game.requirement > 1000000000+(game.trueGlodLimit*10)) {
@@ -713,7 +747,7 @@ function purchaseAutoPrestige() {
 	}
 }
 function autoGlodPrestige() {
-	if (game.potentialGlod == game.trueGlodLimit && game.autoPresIs == "ON" && game.autoUpgrNum[17] > 0) {
+	if (game.potentialGlod == game.trueGlodLimit && game.autoPresIs == "ON" && game.autoUpgrNum[17] > 0 && !game.limitless) {
 		glodPrestige();
 	}
 }
@@ -777,6 +811,16 @@ function toggleAuto() {
 function toggleAutoPres() {
 	game.autoPresIs == "ON" ? game.autoPresIs = "OFF" : game.autoPresIs = "ON";
 	document.getElementById("autoPresTog").innerHTML = `Auto prestige (${game.autoPresIs})`;
+}
+/*			Limitless mode 			*/
+function activateDarkMachine() {
+	game.limitless = !game.limitless;
+	glodPrestige();
+	if (game.limitless) {
+		document.getElementById("machinePowerButton").innerHTML = "Turn off the machine";
+	} else {
+		document.getElementById("machinePowerButton").innerHTML = "Turn on the machine";
+	}
 }
 /*		Miscellaneous functions		*/
 function changeTheme(scrollrate) {
@@ -886,6 +930,11 @@ function load() {
 	document.getElementById("tickSlider").value=game.tickSpeed;
 	document.getElementById("autoUpgrTog").innerHTML = `Auto upgrades (${game.autoUpgrIs})`;
 	document.getElementById("autoPresTog").innerHTML = `Auto prestige (${game.autoPresIs})`;
+	if (game.limitless) {
+		document.getElementById("machinePowerButton").innerHTML = "Turn off the machine";
+	} else {
+		document.getElementById("machinePowerButton").innerHTML = "Turn on the machine";
+	}
 	updateFont();
 	updateBars();
 	if (game.autoSaveState == 0) {
