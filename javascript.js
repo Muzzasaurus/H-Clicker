@@ -162,7 +162,7 @@ function onStart() {
 			let d = Math.floor(offTime/86400);
 			document.getElementById("offlineTime").innerHTML = `You've been offline for ${d}:${addZero(h)}:${addZero(m)}:${addZero(s)}`;
 			document.getElementById("offlineGain").innerHTML = `At ${addCommas(Math.round(game.trueAutoH))} HPS, you earned ${addCommas(Math.round(game.trueAutoH*offTime))} H`;
-			document.getElementById("offlineGlodGain").innerHTML = `You earned +${addCommas(Math.round(game.glodGain*game.potentialGlod*offTime))} Glod H`;
+			document.getElementById("offlineGlodGain").innerHTML = `You earned +${addCommas(Math.round(game.glodGain*game.potentialGlod*game.hGainBoost*offTime))} Glod H`;
 		}
 		idle(((Date.now() - game.lastTime) / 1000) * game.tickSpeed);
 	} else {
